@@ -1,0 +1,144 @@
+peihongguo@Peihongs-MacBook-Pro:~/Desktop/Courses/CSCE 625/hw1$ ./equationsimplier.py examples.txt
+pattern: a = b  ->  b = a
+pattern: (a + b) = c  ->  a = (c - b)
+pattern: (a - b) = c  ->  a = (c + b)
+pattern: (a * b) = c  ->  a = (c / b)
+pattern: (a / b) = c  ->  a = (c * b)
+pattern: a^b = c  ->  a = (c root b)
+pattern: sqrt(x) = y  ->  x = y^2
+pattern: sin(x) = y  ->  x = asin(y)
+pattern: cos(x) = y  ->  x = acos(y)
+pattern: tan(x) = y  ->  x = atan(y)
+pattern: asin(x) = y  ->  x = sin(y)
+pattern: acos(x) = y  ->  x = cos(y)
+pattern: atan(x) = y  ->  x = tan(y)
+pattern: log(x) = y  ->  x = 10^y
+pattern: ln(x) = y  ->  x = e^y
+pattern: e^x = y  ->  x = ln(y)
+pattern: 10^x = y  ->  x = log(y)
+pattern: ((a + b) + c)  ->  (a + (b + c))
+pattern: ((a + b) - c)  ->  ((a - c) + b)
+pattern: ((a - b) - c)  ->  (a - (b + c))
+pattern: (a - (b - c))  ->  ((a - b) + c)
+pattern: (a - (b + c))  ->  ((a - b) - c)
+pattern: ((a * b) * c)  ->  (a * (b * c))
+pattern: ((a * b) / c)  ->  (a * (b / c))
+pattern: (a * (b / c))  ->  ((a * b) / c)
+pattern: ((a / b) / c)  ->  (a / (b * c))
+pattern: (a / (b / c))  ->  ((a / b) * c)
+pattern: (a / (b * c))  ->  ((a / b) / c)
+pattern: a^b^c  ->  a^(b * c)
+pattern: (a + b)  ->  (b + a)
+pattern: (a * b)  ->  (b * a)
+pattern: (a * (b + c))  ->  ((a * b) + (a * c))
+pattern: (a * (b - c))  ->  ((a * b) - (a * c))
+pattern: ((a + b) / c)  ->  ((a / c) + (b / c))
+pattern: ((a - b) / c)  ->  ((a / c) - (b / c))
+pattern: ((a * b) + (a * c))  ->  (a * (b + c))
+pattern: ((a * b) - (a * c))  ->  (a * (b - c))
+pattern: ((a / c) + (b / c))  ->  ((a + b) / c)
+pattern: ((a / c) - (b / c))  ->  ((a - b) / c)
+pattern: (a + (a * b))  ->  (a * (1 + b))
+pattern: (a + a)  ->  (a * 2)
+pattern: (a - (a * b))  ->  (a * (1 - b))
+pattern: ((a * b) - a)  ->  (a * (b - 1))
+pattern: (a - a)  ->  0
+pattern: (a + 0)  ->  a
+pattern: (a - 0)  ->  a
+pattern: (a * 0)  ->  0
+pattern: a^0  ->  1
+pattern: (a * 1)  ->  a
+pattern: (a / 1)  ->  a
+pattern: a^1  ->  a
+pattern: (sin(x)^2 + cos(x)^2)  ->  1
+pattern: (e^(a * x) * e^(b * x))  ->  e^((a + b) * x)
+pattern: (x Diff x)  ->  1
+pattern: (x^y Diff x)  ->  (y * x^(y - 1))
+pattern: ((x + y) Diff z)  ->  ((x Diff z) + (y Diff z))
+pattern: ((x - y) Diff z)  ->  ((x Diff z) - (y Diff z))
+pattern: ((x * y) Diff z)  ->  (((x Diff z) * y) + (x * (y Diff z)))
+pattern: ((x / y) Diff z)  ->  ((((x Diff z) * y) - (x * (y Diff z))) / (y * y))
+pattern: (1 / (1 / x))  ->  x
+pattern: (x^a * x^b)  ->  x^(a + b)
+Processing file examples.txt
+['x = 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1', 'x = (2 + 10) * (2^2)', 'x = 6 * 2 / (-1 + 4 * 0 + 1)', 'y | x = y - x', '(2 * sqrt(x) * 3) - y = pi', 'x * 3 * y * 4 * z * 5 / 6 = 800', 'e^x = z * (sin(y)^2 + cos(y)^2)', 'e^x = sin(8 + 3/2 * z + y - 1/2 * z)^2 + cos(y + 8 + z)^2', 'Diff(x^2 + 10 * x + 2, x) = 4 * z', '#x = Integrate(z * sin(z), z)']
+var: x, equ: x = (((((((((((((((((((1 + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1)
+Simplifying with AStar search:
+Best: x = (((1 + (((((((((((((3 + 1) + 1) + 1) + 1) + 1) + 1) + 2) + 1) + 1) + 1) + 1) + 1) + 1)) + 1) + 1)
+Best: x = (((1 + (((((((((1 + (5 + 1)) + 1) + 1) + 2) + 1) + 1) + 2) + 1) + 1)) + 1) + 1)
+Best: x = (((1 + (((((2 + ((7 + 1) + 1)) + 1) + 1) + 2) + 2)) + 1) + 1)
+Best: x = (((1 + (2 + ((((2 + 9) + 1) + 1) + 2))) + 1) + 1)
+Best: x = ((1 + (1 + (2 + (2 + (12 + 1))))) + 1)
+Best: x = (1 + (1 + (1 + (15 + 2))))
+Best: x = (1 + (18 + 1))
+Best: x = 20
+Simplified in  3.50691509247  seconds
+x = 20
+var: x, equ: x = ((2 + 10) * 2^2)
+Simplifying with AStar search:
+Best: x = 48
+Simplified in  0.00461101531982  seconds
+x = 48
+var: x, equ: x = ((6 * 2) / (((-1) + (4 * 0)) + 1))
+Simplifying with AStar search:
+Best: x = (12 / (-1 + 1))
+Best: x = undefined
+Simplified in  0.0168838500977  seconds
+x = undefined
+var: y, equ: x = (y - x)
+Simplifying with AStar search:
+Best: (y - x) = x
+Best: y = (x + x)
+Best: y = (x * 2)
+Simplified in  0.00984811782837  seconds
+y = (x * 2)
+var: x, equ: (((2 * sqrt(x)) * 3) - y) = pi
+Simplifying with AStar search:
+Best: ((2 * sqrt(x)) * 3) = (pi + y)
+Best: (2 * sqrt(x)) = ((pi + y) / 3)
+Best: sqrt(x) = (((pi + y) / 3) / 2)
+Best: x = (((pi + y) / 3) / 2)^2
+Best: x = ((pi + y) / 6)^2
+Simplified in  0.0656361579895  seconds
+x = ((pi + y) / 6)^2
+var: x, equ: ((((((x * 3) * y) * 4) * z) * 5) / 6) = 800
+Simplifying with AStar search:
+Best: (((((x * 3) * y) * (4 * z)) * 5) / 6) = 800
+Best: ((((x * 3) * y) * (4 * z)) * 5) = (800 * 6)
+Best: (((x * (3 * y)) * (4 * z)) * 5) = 4800
+Best: ((x * (3 * y)) * (4 * z)) = (4800 / 5)
+Best: (x * (3 * y)) = (960 / (4 * z))
+Best: x = ((960 / (4 * z)) / (3 * y))
+Best: x = ((240 / z) / (3 * y))
+Best: x = ((80 / y) / z)
+Simplified in  0.225933790207  seconds
+x = ((80 / y) / z)
+var: x, equ: e^x = (z * (sin(y)^2 + cos(y)^2))
+Simplifying with AStar search:
+Best: x = ln((z * (sin(y)^2 + cos(y)^2)))
+Best: x = ln((z * 1))
+Best: x = ln(z)
+Simplified in  0.0224759578705  seconds
+x = ln(z)
+var: x, equ: e^x = (sin((((8 + ((3 / 2) * z)) + y) - ((1 / 2) * z)))^2 + cos(((y + 8) + z))^2)
+Simplifying with AStar search:
+Best: x = ln((sin((((8 + ((3 / 2) * z)) + y) - ((1 / 2) * z)))^2 + cos(((y + 8) + z))^2))
+Best: x = ln((sin((((8 + ((3 / 2) * z)) + y) - (z / 2)))^2 + cos(((y + 8) + z))^2))
+Best: x = ln((sin(((((z * 3) - z) / 2) + (8 + y)))^2 + cos(((y + 8) + z))^2))
+Best: x = ln((sin((((z * (3 - 1)) / 2) + (8 + y)))^2 + cos(((y + 8) + z))^2))
+Best: x = ln((sin(((z * 1) + (8 + y)))^2 + cos(((y + 8) + z))^2))
+Best: x = ln((sin((z + (8 + y)))^2 + cos(((y + 8) + z))^2))
+Best: x = ln(1)
+Simplified in  66.2700810432  seconds
+x = 0.0
+var: x, equ: (((x^2 + (10 * x)) + 2) Diff x) = (4 * z)
+Simplifying with AStar search:
+Best: ((x^2 + (10 * x)) Diff x) = ((4 * z) - 0)
+Best: ((x^2 + (10 * x)) Diff x) = (4 * z)
+Best: ((x^2 Diff x) + (0 + 10)) = (4 * z)
+Best: (x^2 Diff x) = ((4 * z) - 10)
+Best: (2 * x) = ((4 * z) - 10)
+Best: x = (((4 * z) - 10) / 2)
+Best: x = ((z * 2) - 5)
+Simplified in  0.585206985474  seconds
+x = ((z * 2) - 5)

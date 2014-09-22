@@ -1,0 +1,3 @@
+1. PLY: PLY (Python Lex-Yacc) an implementation of lex and yacc parsing tools for Python. http://www.dabeaz.com/ply/ 
+2. AIAMA-Python: Python implementation of algorithms from Russell and Norvig’s “Artificial Intelligence: A Modern
+Approach” https://code.google.com/p/aima-python/
