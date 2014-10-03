@@ -1,0 +1,291 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,latexsym,paralist}
+\usepackage{courier}
+
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage{graphviz}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+\title{CSCE 625 Programming Assignment 1 Report}
+\author{Peihong Guo~(UIN~421003404)}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\digraph[scale=0.5]{MyGraph}{rankdir=LR; a->b; b->c; d->c; e->d; f->a; f->e;}
+
+\section{Introduction}
+In this project, a equation solver using informed search is implemented. The implementation uses A-star search with a well chosen heuristic, and employs an optimization that significantly speeds up the search process. The solver depends on a set of rules that transform equations or expressions to their less complex equivalence. The rule system is implemented in an extensible way that new rules can be added to the solver to enable more mathematical manipulations. The solver is able to simplify a wide range of equations with various degree of complexity, which will be demonstrated in the results.
+
+\section{Algorithm}
+The solver consists of two main modules, the search module and the rule system module. The search algorithm is a variation of the standard A-star algorithm, where optimizations are included to speed up the search process. The search is performed on the set of equivalent equations $S = \{e_i\}$ defined by a set of transformation rules $R$. The is a graph search problem because the each equation in $S$ can be transformed to and from a few other equations in $S$.
+
+\subsection{Search}
+A-star algorithm is guaranteed to reach an optimal goal state given a admissible and consistent heuristic. Therefore one of the most important aspect of the search module is the definition of an effective heuristic.
+
+\paragraph{Heuristic} The heuristic is inspired from the solution process of an equation: the ultimate goal of solving an equation is to move $every$ component of the equation to the right hand side $except~for$ the unknown. The number of actions needed to achieve this goal is at least the depth of the unknown in the prefix tree of the equation. For example, consider the following equation:
+\[ x + 1 = 2 \]
+Its prefix representation is 
+\[(=~(+~x~1)~2)\]
+The depth of the unknown $x$ is 1 (in the tree of LHS of the equation), and we need exactly 1 action to solve it. Another example:
+\[ x = y - 1/2*x \]
+Its prefix representation is 
+\[(=~x~(-~y~(*~(/~1~2)~x)\]
+The depth of the unknown $x$ is 0 in the LHS tree and 2 in the RHS tree, and we need at least 3 actions to solve it. Note that in this case, the unknow also appears in the RHS, and we need at least 1 extra action to move it to LHS. This is why the number of actions is at least 3 rather than 2.
+
+To state the above observation more formally, the heuristic is defined as:
+\[ h = VariableDepth(LHS) + VariableDepth(RHS) + VariableIn(RHS)?1:0 \]
+
+The extra 1 added to the heuristic is critical to search performance. In fact, this slight modification leads to at least 2X speed up. The rational behind this is equations with the unknown in RHS would definitely require at least one more action to move the unknow to the left hand side, even if the equation is already solved (say, $1=x$). 
+
+From the analysis above, it is apparent this heuristic is admissible. On the other hand, the heuristic is also consistent because the transformation from one equation to another could increase the variable depth for at most one(details about this are discussed in the rules section), thus the heuristic satisfies:
+\[ h(x) <= d(x, y) + h(y) \]
+if distance between two states is defined as the number of actions between them.
+
+One problem of this heuristic is that it does not consider the complexity of the expressions without the unknown. Consider the following example:
+\[ x = 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 \]
+The heuristic value by the previous definition is 0 here, but it takes at least 15 steps to achieve the solution state. For such cases, the previously defined heuristic significantly underestimates the distance of a equation to the final solution. 
+
+From the equation tree it is obvious that the above example has a depth of 15 on the RHS:
+\[ 
+\begin{split}
+&(=~(+~1(+~1(+~1(+~1(+~1(+~1(+~1(+~1(+~1(+~1(+~1(+~1(+~1(+~1\\
+&(+~1(+~1~1)))))))))))))))))
+\end{split} \]
+This leads to a similar heuristic that works very well for such cases: the maximum depth of a expression. This heuristic is defined as:
+\[ h = MaxDepth(LHS) + MaxDepth(RHS) + VariableIn(RHS)?1:0 \]
+However, this heuristic is not admissible.
+
+\bigbreak
+\bigbreak
+With the heuristic defined above, the search algorithm still takes a long time to simplify some very simple equations. A brief analysis reveals that the cause of this is problem. For non-trivial equations, mostly equations with more than 10 nodes, the possible states to examine explodes quickly as the search progresses. This is expected because there are exponential number of possible states, and the branching factor is very high (at least ten in most cases). The overwhelming number of states to examine leads to a unbearable long running time. To alleviate this, a restarting scheme is included in the search algorithm.
+
+\paragraph{Restarting} The restarting scheme, as its name indicates, is a method of restarting the search at some point of the search process in order to achieve faster running time. The basic idea is that most states generated in the early stage of the search is useless because they either have could large distance to goal state and still capable of generating large number of states with little value. Meanwhile, some states are worth more focus because they are significantly simplified compared to the original equation. However, such states could be placed in the middle of the search queue due to a high path cost. Restart the search process with such states is thus a good idea to remove all the useless early-stage states as well as to focus the precious computation power on the most promising candidates. That is, the search process is restarted $every~time$ a $good~enough$ candidate is found.
+
+It is vital to define $good~enough$ candidates properly because the restarting is radical pruning scheme that discards all previously discovered search nodes, which could be dangerous if the candidate chosen as restart point is no better than the previous starting point. The following criteria is used when determining if a candidate is significantly better than the previously found best solution:
+
+Denote the new candidate as $e_{new}$ and the previous best solution as $e_{best}$,
+\begin{itemize}
+\item If LHS of $e_{new}$ is the unknown and the unknown is not in its RHS, and $e_{best}$ has the unknown in both side or the LHS of $e_{best}$ is not exactly the unknown, $e_{new}$ is better; and vice versa. For example:
+\[x=4/2\]
+is better than
+\[x=4-x\text{~or~}2*x=4\] 
+\item If the number of leaf nodes in the equation tree of $e_{new}$ is smaller than that in $e$, $e_{new}$ is better; and vice versa. For example:
+\[x=2\]
+is better than
+\[x=1+1\]
+\item If the heuristic value of $e_{new}$ is smaller than that of $e$, $e_{new}$ is better; and vice versa. For example:
+\[x=1\]
+is better than
+\[1=x\]
+\item If the number of variable of $e_{new}$ is smaller than that of $e$, $e_{new}$ is better; and vice versa. For example:
+\[2*x = 2\]
+is better than:
+\[x + x = 2\]
+\item If the number of leaf nodes in the LHS of $e_{new}$ is smaller than that of $e$, $e_{new}$ is better; and vice versa. For example:
+\[x = 1/2\]
+is better than
+\[2*x = 1\]
+\item If by all the above criteria, $e_{new}$ and $e$ are equally good, $e$ is better.
+\end{itemize}
+
+The restarting scheme is very powerful. It reduces the running time of the search by a factor of 10 when handling complex equations.
+
+\paragraph{Node Expansion} Node expansion is the process of transforming an equation to an equivalent one. In the search algorithm, node expansion is done by applying all available rules to $every~$ applicable node in the equation tree. For example, applying commutativity to $(x+1)+2=4$ results in two new equations: $(1+x)+2=4$ and $2+(x+1)=4$. This approach usually lead to a very high branching factor for complicated equations where a single rule can apply to several places at the same time, not to mention there could be multiple rules applicable to the equation.
+
+\subsection{Rules}
+The rule system is the other important module in the solver. It is built in a generic way that managing rules is extremely simple. There are two types of rules in the rule system: evaluation rules and transformation rules. 
+
+The evaluation rules are implemented in a per-case basis because they all involve actual mathematical computation. For example, $1+1$ will be evaluated directly and the node $(+~1~1)$ will be replaced with a single node $2$ in the expression/equation tree.
+
+Transformation rules are implemented to be generic so that the application of these rules can be handled in the same way. To define a transformation rule, one just write down the equation before and after applying the rule as well as all the symbols in the rule. The defined rules are then parsed into expression/equation trees and used for pattern matching and node modification during the search process. Because of the unified representation, the application of these rules are simplified and can be handled uniformly.
+
+For a list of all rules included in the system, please refer to Appendix.~\ref{app:rules}.
+
+\paragraph{Representation}A rule is defined as a tuple $R(s, p, m)$, where $s$ is the set of symbolic elements in the rule, $p$ is the pattern of the rule and $m$ is the modifier of the rule(the expression/equation after applying the rule). For example, the associativity of addition is defined as follows (in Python code):
+\begin{lstlisting}
+ass_add = Pattern(['a', 'b', 'c'], '(a+b)+c', 'a+(b+c)')
+ass_add_mns = Pattern(['a', 'b', 'c'], '(a+b)-c', '(a-c)+b')
+\end{lstlisting}
+
+\paragraph{Application} To apply a rule to transform an equation, a breath first traversal is used to visit every node in the equation tree. When visiting a node, the rule being considered is used to match the node. If the matching succeeds, the node will be replaced with a node generated with the modifier of this rule, and the entire equation is then transformed. The modified equation is treated as a variation of the current equation and will be enqueued to the search frontier.
+
+When matching a node $n$ with a pattern, the pattern expression tree $p$ is used where each node $n_p$ in the tree $p$ is compared to a corresponding node in the subtree induced by $n$. The comparisons are considered successful if the nodes are the same or $n_p$ is a symbolic node(a node whose content is a symbol defined by the rule). For example, $x+1$ will be matched by the commutativity rule \texttt{R([`a', `b'], `a+b', `b+a')} where $x$ is matched with $a$ and $1$ is matched with $b$. This produces the modified node $1+x$ because the modifier is \texttt{`b+a'}.
+
+\section{Results}
+The following equations are used for testing the solver:
+\begin{displaymath}
+\begin{split}
+(1)& x = 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1\\
+(2)& x = (2 + 10) * (2^2)\\
+(3)& x = 6 * 2 / (-1 + 4 * 0 + 1)\\
+(4)& y | x = y - x\\
+(5)& (2 * \text{sqrt}(x) * 3) - y = pi\\
+(6)& x * 3 * y * 4 * z * 5 / 6 = 800\\
+(7)& e^x = z * (\sin(y)^2 + \cos(y)^2)\\
+(8)& e^x = \sin(8 + 3/2 * z + y - 1/2 * z)^2 + \cos(y + 8 + z)^2\\
+(9)& \text{Diff}(x^2 + 10 * x + 2, x) = 4 * z\\
+\end{split}
+\end{displaymath}
+
+For equation (4), it means the variable to solve for is $y$ rather than $x$, and the | is a separator.
+
+The running times for solving the equations above are listed in Table.\ref{tab:perf}. It is clear that $H_1$, the maximum depth heuristic, works very well for equation 1. However, its performance is not as good when applied to more complex equations (Equation 5, 6 and 8) where the depth of variable is a more appropriate heuristic. For those equations, $H_2$ performs much better.
+
+Also from the results we can see that $H_2$ without adding one when the unknown appears in RHS runs from 1.3X to 5X slower than $H_2$, while $H_2$ without restart runs at least 10X slower and even fail for sufficiently complicated equations such as Equation 1, 6 and 8.
+
+\begin{table}[hbtp]
+\centering
+\begin{tabular}{c|c|c|c|c|c}
+\hline
+ Equation &  $0.5 * (H_1 + H_2)$ & $H_1$ & $H_2$ & $H_2$ without +1 & $H_2$ without Restart\\
+ \hline
+1 & 0.1810 & 0.1807 & 3.5069 & 4.0323 & - \\
+2 & 0.0030 & 0.0027 & 0.0046 & 0.0051 & 0.0042 \\
+3 & 0.0069 & 0.0067 & 0.0169 & 0.0062 & 0.0235 \\
+4 & 0.0122 & 0.0103 & 0.0098 & 0.0099 & 0.0120 \\
+\textbf{5} & 0.1034 & 0.1469 & 0.0656 & 0.0727 & 0.7449 \\
+\textbf{6} & 4.3405 & 1.3226 & 0.2259 & 1.1154 & - \\
+7 & 0.0147 & 0.0141 & 0.0225 & 0.0203 & - \\
+\textbf{8} & - & - & 66.2701 & 89.9225 & - \\
+9 & 0.5881 & 1.1775 & 0.5852 & 0.9391 & - \\
+ \hline
+\end{tabular}
+\caption{Running time (in seconds) of different heuristics / optimizations. $H_1$ is the max depth heuristic, and $H_2$ is the max variable depth heuristic. $H_2$ without +1 is the $H_2$ without adding one when the unknown appears in RHS. A missing value means the search failed for that case.}\label{tab:perf}
+\end{table}
+
+\appendix
+\section{Implemented Rules}
+\subsection{Evaluation Rules}
+\begin{enumerate}
+\item Addition: $a + b$
+\item Subtraction: $a - b$
+\item Multiplication: $a * b$
+\item Division: $a / b$
+\item Power: $a ^ b$
+\item Root: $root(a, b) = a^{1/b}$
+\item Negation: $-a$
+\item Function evaluations: $\sin, \cos, \tan, \text{asin, acos, atan, sqrt}, \log, \ln$
+\item Differentiation: $\text{Diff}(a, x) = 0$
+\end{enumerate}
+\subsection{Transformation Rules}
+\paragraph{Move Rules}
+\begin{enumerate}
+\item $a=b \rightarrow b=a$
+\item $a+b=c \rightarrow a=c-b$
+\item $a-b=c \rightarrow a=c+b$
+\item $a*b=c \rightarrow a=c/b$
+\item $a/b=c \rightarrow a=c*b$
+\item $a^b=c \rightarrow a=root(c, b)$
+\end{enumerate}
+\paragraph{Inverse Function Rules}
+\begin{enumerate}
+\item $\text{sqrt}(x)=y \rightarrow x=y^2$
+\item $\sin(x)=y \rightarrow x=\text{asin}(y)$
+\item $\cos(x)=y \rightarrow x=\text{acos}(y)$
+\item $\tan(x)=y \rightarrow x=\text{atan}(y)$
+\item $\text{asin}(x)=y \rightarrow x=\sin(y)$
+\item $\text{acos}(x)=y \rightarrow x=\cos(y)$
+\item $\text{atan}(x)=y \rightarrow x=\tan(y)$
+\item $\log(x) = y \rightarrow x = 10^y$
+\item $\ln(x) = y \rightarrow x = e^y$
+\item $e^x = y \rightarrow x = \ln(y)$
+\item $10^x = y \rightarrow x = \log(y)$
+\end{enumerate}
+\paragraph{Associativity Rules}
+\begin{enumerate}
+\item $(a+b)+c \rightarrow a+(b+c)$
+\item $(a+b)-c \rightarrow (a-c)+b$
+\item $(a-b)-c \rightarrow (a-c)-b$
+\item $a-(b-c) \rightarrow (a-b)+c$
+\item $a-(b+c) \rightarrow (a-b)-c$
+\item $(a*b)*c \rightarrow a*(b*c)$
+\item $(a*b)/c \rightarrow a*(b/c)$
+\item $a*(b/c) \rightarrow (a*b)/c)$
+\item $a/(b/c) \rightarrow a/(b*c)$
+\item $a/(b/c) \rightarrow (a/b)*c)$
+\item $a/(b*c) \rightarrow (a/b)/c)$
+\item $(a^b)^c \rightarrow a^{b*c}$
+\end{enumerate}
+
+\paragraph{Commutativity Rules}
+\begin{enumerate}
+\item $a+b \rightarrow b+a$
+\item $a*b \rightarrow b*a$
+\end{enumerate}
+
+\paragraph{Distribution Rules}
+\begin{enumerate}
+\item $a*(b+c) \rightarrow a*b+a*c$
+\item $a*(b-c) \rightarrow a*b-a*c$
+\item $(a+b)/c \rightarrow a/c+b/c$
+\item $(a-b)/c \rightarrow a/c-b/c$
+\item $a*b+a*c \rightarrow a*(b+c)$
+\item $a*b-a*c \rightarrow a*(b-c)$
+\item $a/b+a/c \rightarrow (a+b)/c$
+\item $a/b-a/c \rightarrow (a-b)/c$
+\item $a+a*b \rightarrow  a*(1+b)$
+\item $a+a \rightarrow  a*2$
+\item $a-a*b \rightarrow  a*(1-b)$
+\item $a*b-a \rightarrow  a*(b-1)$
+\item $a-a \rightarrow  0$
+\end{enumerate}
+
+\paragraph{0 1 Rules}
+\begin{enumerate}
+\item $a+0 \rightarrow a$
+\item $a-0 \rightarrow a$
+\item $a*0 \rightarrow 0$
+\item $a^0 \rightarrow 1$
+\item $a*1 \rightarrow a$
+\item $a/1 \rightarrow a$
+\item $a^1 \rightarrow a$
+\end{enumerate}
+
+\paragraph{Identities}
+\begin{enumerate}
+\item $\sin(x)^2 + cos(x)^2 \rightarrow 1$
+\item $e^{a*x}*e^{b*x} \rightarrow e^{(a*x+b*x)}$
+\end{enumerate}
+
+\paragraph{Differentiation}
+\begin{enumerate}
+\item $\text{Diff}(x, x) \rightarrow 1$
+\item $\text{Diff}(x^y, x) \rightarrow y*x^(y-1)$
+\item $\text{Diff}(x+y, z) \rightarrow Diff(x, z) + Diff(y, z)$
+\item $\text{Diff}(x-y, z) \rightarrow Diff(x, z) - Diff(y, z)$
+\item $\text{Diff}(x*y, z) \rightarrow Diff(x, z) * y + x * Diff(y, z)$
+\item $\text{Diff}(x/y, z) \rightarrow (Diff(x, z) * y - x * Diff(y, z)) / (y * y)$
+\end{enumerate}
+
+\paragraph{Special Rules}
+\begin{enumerate}
+\item $1/(1/x) \rightarrow x$
+\item $x^a*x^b \rightarrow x^{a+b}$
+\end{enumerate}
+\end{document}
