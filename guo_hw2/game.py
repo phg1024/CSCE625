@@ -2,22 +2,25 @@
 __author__ = 'Peihong Guo'
 
 import argparse
+from printcolors import *
+
 
 class State(object):
-    def __init__(self, player, n, parent=None):
+    def __init__(self, player, n, lev=0, parent=None):
         self.player = player
         self.n = n      # remaining matches after taking k matches
         self.parent = parent
         self.children = []
         self.utility = -1
+        self.lev = lev
 
     def __eq__(self, other):
-        return self.player == other.player and self.k == other.k and self.n == other.n
+        return self.player == other.player and self.n == other.n
 
     def k(self):
         # returns the number of matches taken in previous by the opponent
         if self.parent:
-            return self.n - self.parent.n
+            return self.parent.n - self.n
         else:
             return 0
 
@@ -30,22 +33,26 @@ class State(object):
         else:
             return 'max'
 
+    def __repr__(self):
+        return str(self.player) + ' ' + colorize(str(self.k()), 'blue') + ' ' + colorize(str(self.n), 'green') + ' ' + colorize(str(self.utility), 'red')
+
 def generate_children(n):
     if n.is_terminal():
-        return []
+        return list()
 
-    children = []
+    children = list()
     next_player = n.next_player()
     for c in [1, 2, 3]:
         if n.n - c >= 0:
-            children.append(State(next_player, n.n - c, n))
+            children.append(State(next_player, n.n - c, n.lev+1, n))
     return children
 
 def print_game_tree(n):
-    print n.player, n.n, n.utility
+    print n.lev*'    ', repr(n)
     if n.children:
         for child in n.children:
             print_game_tree(child)
+
 
 def generate_game_tree(n):
     print 'generating game tree for %d matches ...' % n
@@ -56,7 +63,7 @@ def generate_game_tree(n):
     s.append((root, 0))
 
     while s:
-        node, c = s.pop(0)
+        node, c = s.pop(-1)
 
         if c == 0:
             # first visit, just add its children
@@ -80,6 +87,10 @@ def generate_game_tree(n):
     print 'generated'
     return root
 
+def alpha_beta_prune(root):
+    return root
+
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
@@ -89,4 +100,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     for n in args.nmatches:
         tree = generate_game_tree(n)
+        pruned_tree = alpha_beta_prune(tree)
         print_game_tree(tree)
