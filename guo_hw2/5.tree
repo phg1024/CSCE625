@@ -1,0 +1,75 @@
+digraph{
+{
+node [shape=plaintext];
+"max0"->"min0"->"max1"->"min1"->"max2"->"min2"
+"max0"[label="max"];
+"min0"[label="min"];
+"max1"[label="max"];
+"min1"[label="min"];
+"max2"[label="max"];
+"min2"[label="min"];
+}
+{
+0[label=5];
+0->1;
+0->2;
+0->3;
+1[label=4];
+1->4;
+1->5;
+1->6;
+2[label=3];
+2->7;
+2->8;
+2->9;
+3[label=2];
+3->10;
+3->11;
+4[label=3];
+4->12;
+4->13;
+4->14;
+5[label=2];
+5->15;
+5->16;
+6[label=1];
+6->17;
+7[label=2];
+7->18;
+7->19;
+8[label=1];
+8->20;
+9[label=0];
+10[label=1];
+10->21;
+11[label=0];
+12[label=2];
+12->22;
+12->23;
+13[label=1];
+13->24;
+14[label=0];
+15[label=1];
+15->25;
+16[label=0];
+17[label=0];
+18[label=1];
+18->26;
+19[label=0];
+20[label=0];
+21[label=0];
+22[label=1];
+22->27;
+23[label=0];
+24[label=0];
+25[label=0];
+26[label=0];
+27[label=0];
+}
+{rank = same; "max0"; 0}
+{rank = same; "min0"; 1;2;3}
+{rank = same; "max1"; 4;5;6;7;8;9;10;11}
+{rank = same; "min1"; 12;13;14;15;16;17;18;19;20;21}
+{rank = same; "max2"; 22;23;24;25;26}
+{rank = same; "min2"; 27}
+}

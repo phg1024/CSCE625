@@ -1,0 +1,2 @@
+1. Wikipedia: Moore machine. http://en.wikipedia.org/wiki/Moore_machine
+2. Graphviz: dot guide. http://www.graphviz.org/Documentation/dotguide.pdf
