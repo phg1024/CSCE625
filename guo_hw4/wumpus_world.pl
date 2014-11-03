@@ -31,7 +31,7 @@ type_of_evaluate_world(fig72). % Change this to random for true evaluation.
 
 :- load_files([utils]).  % Basic utilities
 
-:- dynamic  wumpus_world_default_extent/1, max_agent_actions/1.   
+:- dynamic  wumpus_world_default_extent/1, max_agent_actions/1.
 :- dynamic  wumpus_world_extent/1,  wumpus_location/2, wumpus_health/1,  gold/2,  pit/2.
 :- dynamic  agent_location/2,  agent_orientation/1,  agent_in_cave/1,  agent_health/1.
 :- dynamic  agent_gold/1,  agent_arrows/1,  agent_score/1.
@@ -187,7 +187,7 @@ initialize_world(random) :-
 %WNb
   wumpus_world_default_extent(E),
   retract(max_agent_actions(_)),
-  M is (8*E*E), 
+  M is (8*E*E),
   assert(max_agent_actions(M)),
   addto_ww_init_state(wumpus_world_extent(E)),
   all_squares(E,AllSqrs),
@@ -200,7 +200,7 @@ initialize_world(random) :-
   delete(PSqrs1,[WX,WY],PSqrs2),    % deletes element [WX,WY] from list PSqrs1
   pit_probability(PP),              % place pits
   place_objects(pit,PP,PSqrs2,_),
-  
+
 %WNe
   addto_ww_init_state(wumpus_location(WX,WY)),
   addto_ww_init_state(wumpus_health(alive)),
@@ -623,7 +623,7 @@ display_world :-
   wumpus_world_extent(E),
 %WNb
   display_rows(E,E).
-/*  
+/*
   wumpus_health(WH),
   agent_orientation(AA),
   agent_health(AH),
@@ -708,4 +708,3 @@ display_agent(270,'V').
 display_action(Action) :-
   format("~nExecuting ~w~n",[Action]).
 %  (((\+ hidden_cave(yes)) -> display_world);true).
-
