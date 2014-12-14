@@ -11,9 +11,19 @@ title: Blogging Like a Hacker
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="CSCE625 : ">
 
+        <!-- MathJax -->
+        <script type="text/javascript"
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+            });
+        </script>
+      
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>CSCE625 Final Project: Face Alignment</title>
+    <title>CSCE 625 Final Project: Face Alignment</title>
   </head>
 
   <body>
@@ -23,7 +33,7 @@ title: Blogging Like a Hacker
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/phg1024/CSCE625/tree/master/finalproject">View on GitHub</a>
 
-          <h1 id="project_title">CSCE625 Final Project</h1>
+          <h1 id="project_title">CSCE 625 Final Project</h1>
           <h2 id="project_tagline"></h2>
 
             <section id="downloads">
@@ -36,18 +46,45 @@ title: Blogging Like a Hacker
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
+          
+        <!-- Introduction -->
         <h3><a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
+        <p>Face alignment is the task of finding a semantic face shape from an image of human face. The face shape can be defined as a shape vector $S = \{\mathbf p_1, \mathbf p_2, \ldots, \mathbf p_n\}$ containing $n$ semantically interesting spots such as eye corners, nose tip, mouth corners and face contour, etc.</p>
+          <p>Numerous methods have been proposed for face alignment, most of which can be classified into either <em>optimization-based</em> techniques, such as <a href="http://en.wikipedia.org/wiki/Active_appearance_model">Active Appearance Model</a>, or <em>regression-based</em> techniques such as <a href="http://dx.doi.org/10.1007/s11263-013-0667-3">Explicit Shape Regression</a>.</p>
+          <p>In this project, a regression based face alignment algorithm, <a href="http://dx.doi.org/10.1007/s11263-013-0667-3">Face Alignment by Explicit Shape Regression</a>, is implemented. This algorithm is one of the state-of-the-art techniques for face alignment that has both high precision and good running time performance.</p>
+        
+        <!-- Algorithm Outline -->
+        <h3><a id="outline" class="anchor" href="#outline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algorithm Outline</h3>
+        <p>
+        The explicit shape regression (ESR) algorithm generates face shape by repeatedly refining an initial guess shape via a series of cascaded regression functions. The refinement using a regression function $R$ is called a stage, and there are in total $T$ stages. In each stage $t$, the output of the previous stage, $S^{t-1}$, together with the input image $I$ are used to predict a difference shape $\Delta S^t$. The sum of the difference shape and the current guess shape is the output of stage $t$, i.e.</p>
+        \[S^t = S^{t-1} + R^{t-1}(I, S^{t-1})\]
+        where $t\in[1..T]$ is the stage index.
+    
+        <p>In each stage, the regression function is computed by minimizing the following error function:
+            \[R^t = \arg\min_R\sum_{i=1}^N\|\hat S_i - (S_i^{t-1}+R(I_i, S_i^{t-1}))\|^2\]
+        where $N$ is the number of training samples.
+        </p>
+        <p>The regression functions are represented by a series of weak regressors, i.e.
+            \[R^t = (r_1, r_2, \ldots, r_k)\]
+        where each $r_j$ is called a primitive regressor. Each primitive regressor produces a regression output that reduces the shape error slightly, and all the primitive regressors collectively are able to reduce the shape error significantly. 
+        </p>
+        <p>Ferns are chosen as the primitive regressors. A fern is a classification based regressor that takes an $F$ dimensional input feature vector and computes an output vector by classifiy the input into one of the $2^F$ bins. The classification is performed by comparing the input feature vector to $F$ thresholds of the fern. The classification result is an $F$ dimensional binary vector $\mathbf f = (f_1, f_2, \ldots, f_F)$ such that $f_i = 0$ if the $i$th attribute greater than the corresponding threshold and $f_i = 1$ otherwise. The output of the regressor is determined by looking up the output entry for the classification vector.        
+        </p>
+        <p>The output vector for each bin of a fern is computed as
+            \[\delta S_b = \arg\min_{\delta S}\sum_{i\in \Omega_b}\|\hat S_i - (S_i+\delta S)\|\]
+        where $\Omega_b$ is the set of training samples in bin $b$. This gives the following equation of computing the fern output:
+            \[\delta S_b = \frac{\sum_{i\in\Omega_b}(\hat S_i - S_i)}{|\Omega_b|}\]
+            A shrinkage parameter $\beta$ is added to the above equation to overcome over-fitting when the number of training samples in a bin is too small:
+            \[\delta S_b = \frac{1}{1+\beta |\Omega_b|}\frac{\sum_{i\in\Omega_b}(\hat S_i - S_i)}{|\Omega_b|}\]
+        </p>
+        <!-- Implementation Detail -->
+        <h3><a id="detail" class="anchor" href="#outline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation Details</h3>
           
-        <h3><a id="background" class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h3>
-          
-          <h3><a id="outline" class="anchor" href="#outline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algorithm Outline</h3>
-          
-          <h3><a id="detail" class="anchor" href="#outline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation Details</h3>
-          
-          <h3><a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h3>          
+        <!-- Results -->
+        <h3><a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h3>          
           
         <h3><a id="Usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
-          <p>Running the code with provided model file in MATLAB:</p>
+          <p>To find the face shape of an image, download the MATALB source code <a href="https://github.com/phg1024/CSCE625/tree/master/finalproject">here</a>, then run the following script with the <a href="https://dl.dropboxusercontent.com/u/6524738/model.mat">provided model file</a> in MATLAB:</p>
 
 {% highlight matlab %}
 model = load('model_3148_kappa_12.5.mat');
@@ -56,10 +93,15 @@ img = imread([pathname, filename]);
 [box, points] = applyModel(img, model);
 showImageWithPoints(img, box, points);
 {% endhighlight %}
+          <p>Note that you need to run the above script in the folder where you put the downloaded source code</p>
+          <h3><a id="Usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h3>
+          <ol>
+              <li>Xudong Cao, Yichen Wei, Fang Wen, Jian Sun. <em><a href="http://research.microsoft.com/pubs/192097/cvpr12_facealignment.pdf">Face Alignment by Explicit Shape Regression.</a></em> In CVPR 2012.</li>
+              <li>Xudong Cao, Yichen Wei, Fang Wen, Jian Sun. <em><a href="http://dx.doi.org/10.1007/s11263-013-0667-3">Face Alignment by Explicit Shape Regression.</a></em> International Journal of Computer Vision (IJCV), Volume 107, Number 2, pages 177-190.</li>
+          </ol>
 
 
-<h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author Information</h3>
+<h3><a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author Information</h3>
 
 <p>This program is written by <a href="https://github.com/phg1024" class="user-mention">@Peihong</a> as the final project for <a href="http://robotics.cs.tamu.edu/dshell/cs625/">CSCE 625 Artificial Intelligence</a> course in Fall 2014.</p>
 
