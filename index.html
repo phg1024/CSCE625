@@ -49,7 +49,10 @@ title: Blogging Like a Hacker
           
         <!-- Introduction -->
         <h3><a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
-        <p>Face alignment is the task of finding a semantic face shape from an image of human face. The face shape can be defined as a shape vector $S = \{\mathbf p_1, \mathbf p_2, \ldots, \mathbf p_n\}$ containing $n$ semantically interesting spots such as eye corners, nose tip, mouth corners and face contour, etc.</p>
+        <p>Face alignment is the task of finding a semantic face shape from an image of human face. The face shape can be defined as a shape vector $S = \{\mathbf p_1, \mathbf p_2, \ldots, \mathbf p_n\}$ containing $n$ semantically interesting spots, i.e. landmarks, such as eye corners, nose tip, mouth corners and face contour, etc.</p>
+        <div class="imagebox"><img id="fig_landmarks" src="images/landmarks.jpg" width="360px"></img><br>
+        <p class="imagetitle"><strong>Figure 1.</strong> A face shape with 68 landmarks.</p>
+        </div>
           <p>Numerous methods have been proposed for face alignment, most of which can be classified into either <em>optimization-based</em> techniques, such as <a href="http://en.wikipedia.org/wiki/Active_appearance_model">Active Appearance Model</a>, or <em>regression-based</em> techniques such as <a href="http://dx.doi.org/10.1007/s11263-013-0667-3">Explicit Shape Regression</a>.</p>
           <p>In this project, a regression based face alignment algorithm, <a href="http://dx.doi.org/10.1007/s11263-013-0667-3">Face Alignment by Explicit Shape Regression</a>, is implemented. This algorithm is one of the state-of-the-art techniques for face alignment that has both high precision and good running time performance.</p>
         
@@ -66,8 +69,13 @@ title: Blogging Like a Hacker
         </p>
         <p>The regression functions are represented by a series of weak regressors, i.e.
             \[R^t = (r_1, r_2, \ldots, r_k)\]
-        where each $r_j$ is called a primitive regressor. Each primitive regressor produces a regression output that reduces the shape error slightly, and all the primitive regressors collectively are able to reduce the shape error significantly. 
+        where each $r_j$ is called a primitive regressor. In each stage, the input shape is refined by all the primitive regressors in a cascaded manner: $k$ primitive regressors form a chain of regressors, where each primitive regressor is called a level. The level $k$ regressor takes the output shape of previous level as input and predict a delta shape vector to refine the input shape vector. The refined shape vector is then passed to the next level of regressor for further refinement.
         </p>
+        <p>Typically hundreds of primitive regressors are used in each stage. The primitive regressors are weak regressors because they are only able to reduce the shape error slightly, therefore a series of many primitive regressors are needed in each stage. That said, each primitive regressor alone is not able to reduce the shape error much, but all the primitive regressors collectively are able to reduce the shape error significantly. With enough number of primitive regressors, the final regression function becomes very powerful.
+        </p>
+        <div class="imagebox"><img id="fig_regressor" src="images/regressor.png" width="240px"></img><br>
+        <p class="imagetitle"><strong>Figure 2.</strong> Illustration of the regression function. A regressor function has $n$ stages, and each stage contains $k$ primitive regressors. The guess shape is refined by all primitive regressors in a cascaded manner.</p>
+        </div>
         <p>Ferns are chosen as the primitive regressors. A fern is a classification based regressor that takes an $F$ dimensional input feature vector and computes an output vector by classifiy the input into one of the $2^F$ bins. The classification is performed by comparing the input feature vector to $F$ thresholds of the fern. The classification result is an $F$ dimensional binary vector $\mathbf f = (f_1, f_2, \ldots, f_F)$ such that $f_i = 0$ if the $i$th attribute greater than the corresponding threshold and $f_i = 1$ otherwise. The output of the regressor is determined by looking up the output entry for the classification vector.        
         </p>
         <p>The output vector for each bin of a fern is computed as
@@ -79,19 +87,35 @@ title: Blogging Like a Hacker
         </p>
         <!-- Implementation Detail -->
         <h3><a id="detail" class="anchor" href="#outline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation Details</h3>
-          
+        <h4>Face Detection</h4><p>The first step of face alignment is to detect face in input images. This is done by using <a href="http://docs.opencv.org/trunk/doc/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html">OpenCV face detector</a>. The detector returns a list of bounding boxes of potential face regions, in which the initial guess face shapes are placed.</p>
+        <h4>Face Region Scaling</h4>
+        <p>The input images are scaled according to the detected face regions. The scaling is necessary for achieving stable results because the shape indexed features are sampled directly from input images using given shape indexed locations. Larger face shapes are thus more prone to pixel noise in the images. Scaling the images to make sure the faces in all training samples have similar size reduces the undesired noise. In my implementation, the images are scaled such that the size of detected face region is 128x128.</p>
+        <h4>Training Data</h4>
+        <p>The data used for training is available <a href="http://ibug.doc.ic.ac.uk/resources">here</a>. It is a combination of the widely used <a href="http://vis-www.cs.umass.edu/lfw/">LFW dataset</a>, <a href="http://neerajkumar.org/databases/lfpw/">LFPW dataset</a> and <a href="http://www.ifp.illinois.edu/~vuongle2/helen/">Helen dataset</a>. All images are annotated with 68 landmarks illustrated in <a href="#fig_landmarks">Figure. 1</a></p>
+        <h4>Face Alignment Procedure</h4>
+        While applying the trained model for face alignment, a random shape vector is chosen from  a database of face shapes as initial guess. Since the output of the algorithm is a refinement of the input shape, the quality of the initial guess would inevitably affect the alignment output. To remove the effect of this randomness, multiple initial shapes are used simultaneously and the final shape is computed as a combination of all outputs. Cao et al suggested 5 initial shapes would produce good result in most cases, however, more initial shapes are needed in my experiment.
         <!-- Results -->
-        <h3><a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h3>          
+        <h3><a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results and Analysis</h3>   
+        <h4>Successful Cases</h4>
+        For most images with frontal face and neutral expression, the algorithm works very well. The average alignment error is ?.
+        
+        <h4>Failed Cases</h4>
+        For images with side face or large expression (mostly laugh), the alignment error is much larger.
+        
+        <h3></h3>
           
         <h3><a id="Usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
           <p>To find the face shape of an image, download the MATALB source code <a href="https://github.com/phg1024/CSCE625/tree/master/finalproject">here</a>, then run the following script with the <a href="https://dl.dropboxusercontent.com/u/6524738/model.mat">provided model file</a> in MATLAB:</p>
 
 {% highlight matlab %}
-model = load('model_3148_kappa_12.5.mat');
-[filename, pathname] = uigetfile({'*.jpg; *.png; *.gif; *.bmp'; '*.*'}, 'Choose Image');
+model = load('model.mat');
+[filename, pathname] = uigetfile({'*.jpg; *.png; *.gif; *.bmp'; '*.*'}, ...
+                                 'Choose Image');
 img = imread([pathname, filename]);
-[box, points] = applyModel(img, model);
-showImageWithPoints(img, box, points);
+[box, points, succeeded] = applyModel(img, model);
+if succeeded
+    figure;showImageWithPoints(img, box, points);
+end
 {% endhighlight %}
           <p>Note that you need to run the above script in the folder where you put the downloaded source code</p>
           <h3><a id="Usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h3>

@@ -157,6 +157,17 @@ p img {
   border: none;
 }
 
+.imagebox {
+  display: block;
+  text-align: center;
+}
+
+.imagetitle {
+  display: inline;
+  padding: 2px;
+  text-align: center;
+}
+
 pre, code {
   width: 100%;
   color: #222;
