@@ -11,6 +11,12 @@ title: Blogging Like a Hacker
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="CSCE625 : ">
 
+      <!-- Lightbox -->
+      <script src="plugins/lightbox/js/jquery-1.11.0.min.js"></script>
+      <script src="plugins/lightbox/js/lightbox.min.js"></script>      
+      
+      <link href="plugins/lightbox/css/lightbox.css" rel="stylesheet" />
+      
         <!-- MathJax -->
         <script type="text/javascript"
                 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -50,7 +56,8 @@ title: Blogging Like a Hacker
         <!-- Introduction -->
         <h3><a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
         <p>Face alignment is the task of finding a semantic face shape from an image of human face. The face shape can be defined as a shape vector $S = \{\mathbf p_1, \mathbf p_2, \ldots, \mathbf p_n\}$ containing $n$ semantically interesting spots, i.e. landmarks, such as eye corners, nose tip, mouth corners and face contour, etc.</p>
-        <div class="imagebox"><img id="fig_landmarks" src="images/landmarks.jpg" width="360px"></img><br>
+        <div class="imagebox">
+        <a href="images/landmarks.jpg" data-lightbox="landmarks" data-title="A face shape with 68 landmarks."><img id="fig_landmarks" src="images/landmarks.jpg" width="360px"></img></a><br>
         <p class="imagetitle"><strong>Figure 1.</strong> A face shape with 68 landmarks.</p>
         </div>
           <p>Numerous methods have been proposed for face alignment, most of which can be classified into either <em>optimization-based</em> techniques, such as <a href="http://en.wikipedia.org/wiki/Active_appearance_model">Active Appearance Model</a>, or <em>regression-based</em> techniques such as <a href="http://dx.doi.org/10.1007/s11263-013-0667-3">Explicit Shape Regression</a>.</p>
@@ -73,7 +80,8 @@ title: Blogging Like a Hacker
         </p>
         <p>Typically hundreds of primitive regressors are used in each stage. The primitive regressors are weak regressors because they are only able to reduce the shape error slightly, therefore a series of many primitive regressors are needed in each stage. That said, each primitive regressor alone is not able to reduce the shape error much, but all the primitive regressors collectively are able to reduce the shape error significantly. With enough number of primitive regressors, the final regression function becomes very powerful.
         </p>
-        <div class="imagebox"><img id="fig_regressor" src="images/regressor.png" width="240px"></img><br>
+        <div class="imagebox">
+            <a href="images/regressor.png" data-lightbox="regressor" data-title="Illustration of the regression function."><img id="fig_regressor" src="images/regressor.png" width="240px"></img></a><br>
         <p class="imagetitle"><strong>Figure 2.</strong> Illustration of the regression function. A regressor function has $n$ stages, and each stage contains $k$ primitive regressors. The guess shape is refined by all primitive regressors in a cascaded manner.</p>
         </div>
         <p>Ferns are chosen as the primitive regressors. A fern is a classification based regressor that takes an $F$ dimensional input feature vector and computes an output vector by classifiy the input into one of the $2^F$ bins. The classification is performed by comparing the input feature vector to $F$ thresholds of the fern. The classification result is an $F$ dimensional binary vector $\mathbf f = (f_1, f_2, \ldots, f_F)$ such that $f_i = 0$ if the $i$th attribute greater than the corresponding threshold and $f_i = 1$ otherwise. The output of the regressor is determined by looking up the output entry for the classification vector.        
@@ -98,10 +106,56 @@ title: Blogging Like a Hacker
         <h3><a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results and Analysis</h3>   
         <h4>Successful Cases</h4>
         For most images with frontal face and neutral expression, the algorithm works very well. The average alignment error is ?.
+        <div>
+        <table width="90%" left="5%" text-align="center">
+            <tr>
+                <td width="25%"><a href="images/succeeded/0008.png" data-lightbox="input0008" data-title="Input 0008."><img src="images/succeeded/0008.png" width="120px"></a></td>
+                <td width="25%"><a href="images/succeeded/0020.png" data-lightbox="input0020" data-title="Input 0020."><img src="images/succeeded/0020.png" width="120px"></a></td>
+                <td width="25%"><a href="images/succeeded/0039.png" data-lightbox="input0039" data-title="Input 0039."><img src="images/succeeded/0039.png" width="120px"></a></td>
+                <td width="25%"><a href="images/succeeded/0058.png" data-lightbox="input0058" data-title="Input 0058."><img src="images/succeeded/0058.png" width="120px"></a></td>
+            </tr>
+            <tr>
+                <td width="25%"><a href="images/succeeded/aligned_0008.png" data-lightbox="result0008" data-title="Result 0008."><img src="images/succeeded/aligned_0008.png" width="120px"></a></td>
+                <td width="25%"><a href="images/succeeded/aligned_0020.png" data-lightbox="result0020" data-title="Result 0020."><img src="images/succeeded/aligned_0020.png" width="120px"></a></td>
+                <td width="25%"><a href="images/succeeded/aligned_0039.png" data-lightbox="result0039" data-title="Result 0039."><img src="images/succeeded/aligned_0039.png" width="120px"></a></td>
+                <td width="25%"><a href="images/succeeded/aligned_0058.png" data-lightbox="result0058" data-title="Result 0058."><img src="images/succeeded/aligned_0058.png" width="120px"></a></td>
+            </tr>   
+            <tr>
+                <td>Succeeded case 1</td>
+                <td>Succeeded case 2</td>
+                <td>Succeeded case 3</td>
+                <td>Succeeded case 4</td>
+            </tr>            
+        </table>
+        </div>
         
         <h4>Failed Cases</h4>
-        For images with side face or large expression (mostly laugh), the alignment error is much larger.
-        
+        For images with side face or large expression (mostly laugh), the alignment error is much larger. The failure usually occurs in image with occlusion (case 1 and 4), extreme expression (case 2), or extreme lighting conditions (case 3).
+        <div>
+        <table width="90%" left="5%" text-align="center">
+            <tr>
+                <td width="25%"><a href="images/failed/0005.png" data-lightbox="input0005" data-title="Input 0005."><img src="images/failed/0005.png" width="120px"></a></td>
+                <td width="25%"><a href="images/failed/0007.png" data-lightbox="input0007" data-title="Input 0007."><img src="images/failed/0007.png" width="120px"></a></td>
+                <td width="25%"><a href="images/failed/0053.png" data-lightbox="input0053" data-title="Input 0053."><img src="images/failed/0053.png" width="120px"></a></td>
+                <td width="25%"><a href="images/failed/0065.jpg" data-lightbox="input0065" data-title="Input 0065."><img src="images/failed/0065.jpg" width="120px"></a></td>
+            </tr>
+            <tr>
+                <td width="25%"><a href="images/failed/aligned_0005.png" data-lightbox="result0005" data-title="Result 0005."><img src="images/failed/aligned_0005.png" width="120px"></a></td>
+                <td width="25%"><a href="images/failed/aligned_0007.png" data-lightbox="result0007" data-title="Result 0007."><img src="images/failed/aligned_0007.png" width="120px"></a></td>
+                <td width="25%"><a href="images/failed/aligned_0053.png" data-lightbox="result0053" data-title="Result 0053."><img src="images/failed/aligned_0053.png" width="120px"></a></td>
+                <td width="25%"><a href="images/failed/aligned_0065.jpg" data-lightbox="result0065" data-title="Result 0065."><img src="images/failed/aligned_0065.jpg" width="120px"></a></td>
+            </tr>      
+            <tr>
+                <td>Failed case 1</td>
+                <td>Failed case 2</td>
+                <td>Failed case 3</td>
+                <td>Failed case 4</td>
+            </tr>
+        </table>
+        </div>
+      
+        <h4>Gallery</h4>
+        Please follow this <a href="results.html">link</a> to a gallery of results.
         <h3></h3>
           
         <h3><a id="Usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>

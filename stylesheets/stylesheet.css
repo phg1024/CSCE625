@@ -133,6 +133,7 @@ strong {
   font-weight: bold;
 }
 
+/*
 img {
   position: relative;
   margin: 0 auto;
@@ -156,6 +157,7 @@ p img {
   text-align: center;
   border: none;
 }
+*/
 
 .imagebox {
   display: block;
