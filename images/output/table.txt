@@ -1,0 +1,270 @@
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0000.png" data-lightbox="result_0000" data-title="Input image 0000"><img id="fig_result_0000" src="images/output/0000.png" width="240px"></img></a></td><td><a href="images/output/aligned_0000.png" data-lightbox="aligned_result_0000" data-title="Result image 0000"><img id="fig_aligned_result_0000" src="images/output/aligned_0000.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0001.png" data-lightbox="result_0001" data-title="Input image 0001"><img id="fig_result_0001" src="images/output/0001.png" width="240px"></img></a></td><td><a href="images/output/aligned_0001.png" data-lightbox="aligned_result_0001" data-title="Result image 0001"><img id="fig_aligned_result_0001" src="images/output/aligned_0001.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0002.png" data-lightbox="result_0002" data-title="Input image 0002"><img id="fig_result_0002" src="images/output/0002.png" width="240px"></img></a></td><td><a href="images/output/aligned_0002.png" data-lightbox="aligned_result_0002" data-title="Result image 0002"><img id="fig_aligned_result_0002" src="images/output/aligned_0002.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0003.png" data-lightbox="result_0003" data-title="Input image 0003"><img id="fig_result_0003" src="images/output/0003.png" width="240px"></img></a></td><td><a href="images/output/aligned_0003.png" data-lightbox="aligned_result_0003" data-title="Result image 0003"><img id="fig_aligned_result_0003" src="images/output/aligned_0003.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0004.png" data-lightbox="result_0004" data-title="Input image 0004"><img id="fig_result_0004" src="images/output/0004.png" width="240px"></img></a></td><td><a href="images/output/aligned_0004.png" data-lightbox="aligned_result_0004" data-title="Result image 0004"><img id="fig_aligned_result_0004" src="images/output/aligned_0004.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0005.png" data-lightbox="result_0005" data-title="Input image 0005"><img id="fig_result_0005" src="images/output/0005.png" width="240px"></img></a></td><td><a href="images/output/aligned_0005.png" data-lightbox="aligned_result_0005" data-title="Result image 0005"><img id="fig_aligned_result_0005" src="images/output/aligned_0005.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0006.png" data-lightbox="result_0006" data-title="Input image 0006"><img id="fig_result_0006" src="images/output/0006.png" width="240px"></img></a></td><td><a href="images/output/aligned_0006.png" data-lightbox="aligned_result_0006" data-title="Result image 0006"><img id="fig_aligned_result_0006" src="images/output/aligned_0006.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0007.png" data-lightbox="result_0007" data-title="Input image 0007"><img id="fig_result_0007" src="images/output/0007.png" width="240px"></img></a></td><td><a href="images/output/aligned_0007.png" data-lightbox="aligned_result_0007" data-title="Result image 0007"><img id="fig_aligned_result_0007" src="images/output/aligned_0007.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0008.png" data-lightbox="result_0008" data-title="Input image 0008"><img id="fig_result_0008" src="images/output/0008.png" width="240px"></img></a></td><td><a href="images/output/aligned_0008.png" data-lightbox="aligned_result_0008" data-title="Result image 0008"><img id="fig_aligned_result_0008" src="images/output/aligned_0008.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0009.png" data-lightbox="result_0009" data-title="Input image 0009"><img id="fig_result_0009" src="images/output/0009.png" width="240px"></img></a></td><td><a href="images/output/aligned_0009.png" data-lightbox="aligned_result_0009" data-title="Result image 0009"><img id="fig_aligned_result_0009" src="images/output/aligned_0009.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0010.png" data-lightbox="result_0010" data-title="Input image 0010"><img id="fig_result_0010" src="images/output/0010.png" width="240px"></img></a></td><td><a href="images/output/aligned_0010.png" data-lightbox="aligned_result_0010" data-title="Result image 0010"><img id="fig_aligned_result_0010" src="images/output/aligned_0010.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0011.png" data-lightbox="result_0011" data-title="Input image 0011"><img id="fig_result_0011" src="images/output/0011.png" width="240px"></img></a></td><td><a href="images/output/aligned_0011.png" data-lightbox="aligned_result_0011" data-title="Result image 0011"><img id="fig_aligned_result_0011" src="images/output/aligned_0011.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0012.png" data-lightbox="result_0012" data-title="Input image 0012"><img id="fig_result_0012" src="images/output/0012.png" width="240px"></img></a></td><td><a href="images/output/aligned_0012.png" data-lightbox="aligned_result_0012" data-title="Result image 0012"><img id="fig_aligned_result_0012" src="images/output/aligned_0012.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0013.png" data-lightbox="result_0013" data-title="Input image 0013"><img id="fig_result_0013" src="images/output/0013.png" width="240px"></img></a></td><td><a href="images/output/aligned_0013.png" data-lightbox="aligned_result_0013" data-title="Result image 0013"><img id="fig_aligned_result_0013" src="images/output/aligned_0013.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0014.png" data-lightbox="result_0014" data-title="Input image 0014"><img id="fig_result_0014" src="images/output/0014.png" width="240px"></img></a></td><td><a href="images/output/aligned_0014.png" data-lightbox="aligned_result_0014" data-title="Result image 0014"><img id="fig_aligned_result_0014" src="images/output/aligned_0014.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0015.png" data-lightbox="result_0015" data-title="Input image 0015"><img id="fig_result_0015" src="images/output/0015.png" width="240px"></img></a></td><td><a href="images/output/aligned_0015.png" data-lightbox="aligned_result_0015" data-title="Result image 0015"><img id="fig_aligned_result_0015" src="images/output/aligned_0015.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0016.png" data-lightbox="result_0016" data-title="Input image 0016"><img id="fig_result_0016" src="images/output/0016.png" width="240px"></img></a></td><td><a href="images/output/aligned_0016.png" data-lightbox="aligned_result_0016" data-title="Result image 0016"><img id="fig_aligned_result_0016" src="images/output/aligned_0016.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0017.png" data-lightbox="result_0017" data-title="Input image 0017"><img id="fig_result_0017" src="images/output/0017.png" width="240px"></img></a></td><td><a href="images/output/aligned_0017.png" data-lightbox="aligned_result_0017" data-title="Result image 0017"><img id="fig_aligned_result_0017" src="images/output/aligned_0017.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0018.png" data-lightbox="result_0018" data-title="Input image 0018"><img id="fig_result_0018" src="images/output/0018.png" width="240px"></img></a></td><td><a href="images/output/aligned_0018.png" data-lightbox="aligned_result_0018" data-title="Result image 0018"><img id="fig_aligned_result_0018" src="images/output/aligned_0018.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0019.png" data-lightbox="result_0019" data-title="Input image 0019"><img id="fig_result_0019" src="images/output/0019.png" width="240px"></img></a></td><td><a href="images/output/aligned_0019.png" data-lightbox="aligned_result_0019" data-title="Result image 0019"><img id="fig_aligned_result_0019" src="images/output/aligned_0019.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0020.png" data-lightbox="result_0020" data-title="Input image 0020"><img id="fig_result_0020" src="images/output/0020.png" width="240px"></img></a></td><td><a href="images/output/aligned_0020.png" data-lightbox="aligned_result_0020" data-title="Result image 0020"><img id="fig_aligned_result_0020" src="images/output/aligned_0020.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0021.png" data-lightbox="result_0021" data-title="Input image 0021"><img id="fig_result_0021" src="images/output/0021.png" width="240px"></img></a></td><td><a href="images/output/aligned_0021.png" data-lightbox="aligned_result_0021" data-title="Result image 0021"><img id="fig_aligned_result_0021" src="images/output/aligned_0021.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0022.png" data-lightbox="result_0022" data-title="Input image 0022"><img id="fig_result_0022" src="images/output/0022.png" width="240px"></img></a></td><td><a href="images/output/aligned_0022.png" data-lightbox="aligned_result_0022" data-title="Result image 0022"><img id="fig_aligned_result_0022" src="images/output/aligned_0022.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0023.png" data-lightbox="result_0023" data-title="Input image 0023"><img id="fig_result_0023" src="images/output/0023.png" width="240px"></img></a></td><td><a href="images/output/aligned_0023.png" data-lightbox="aligned_result_0023" data-title="Result image 0023"><img id="fig_aligned_result_0023" src="images/output/aligned_0023.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0024.png" data-lightbox="result_0024" data-title="Input image 0024"><img id="fig_result_0024" src="images/output/0024.png" width="240px"></img></a></td><td><a href="images/output/aligned_0024.png" data-lightbox="aligned_result_0024" data-title="Result image 0024"><img id="fig_aligned_result_0024" src="images/output/aligned_0024.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0025.png" data-lightbox="result_0025" data-title="Input image 0025"><img id="fig_result_0025" src="images/output/0025.png" width="240px"></img></a></td><td><a href="images/output/aligned_0025.png" data-lightbox="aligned_result_0025" data-title="Result image 0025"><img id="fig_aligned_result_0025" src="images/output/aligned_0025.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0026.png" data-lightbox="result_0026" data-title="Input image 0026"><img id="fig_result_0026" src="images/output/0026.png" width="240px"></img></a></td><td><a href="images/output/aligned_0026.png" data-lightbox="aligned_result_0026" data-title="Result image 0026"><img id="fig_aligned_result_0026" src="images/output/aligned_0026.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0027.png" data-lightbox="result_0027" data-title="Input image 0027"><img id="fig_result_0027" src="images/output/0027.png" width="240px"></img></a></td><td><a href="images/output/aligned_0027.png" data-lightbox="aligned_result_0027" data-title="Result image 0027"><img id="fig_aligned_result_0027" src="images/output/aligned_0027.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0028.png" data-lightbox="result_0028" data-title="Input image 0028"><img id="fig_result_0028" src="images/output/0028.png" width="240px"></img></a></td><td><a href="images/output/aligned_0028.png" data-lightbox="aligned_result_0028" data-title="Result image 0028"><img id="fig_aligned_result_0028" src="images/output/aligned_0028.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0029.png" data-lightbox="result_0029" data-title="Input image 0029"><img id="fig_result_0029" src="images/output/0029.png" width="240px"></img></a></td><td><a href="images/output/aligned_0029.png" data-lightbox="aligned_result_0029" data-title="Result image 0029"><img id="fig_aligned_result_0029" src="images/output/aligned_0029.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0030.png" data-lightbox="result_0030" data-title="Input image 0030"><img id="fig_result_0030" src="images/output/0030.png" width="240px"></img></a></td><td><a href="images/output/aligned_0030.png" data-lightbox="aligned_result_0030" data-title="Result image 0030"><img id="fig_aligned_result_0030" src="images/output/aligned_0030.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0031.png" data-lightbox="result_0031" data-title="Input image 0031"><img id="fig_result_0031" src="images/output/0031.png" width="240px"></img></a></td><td><a href="images/output/aligned_0031.png" data-lightbox="aligned_result_0031" data-title="Result image 0031"><img id="fig_aligned_result_0031" src="images/output/aligned_0031.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0032.png" data-lightbox="result_0032" data-title="Input image 0032"><img id="fig_result_0032" src="images/output/0032.png" width="240px"></img></a></td><td><a href="images/output/aligned_0032.png" data-lightbox="aligned_result_0032" data-title="Result image 0032"><img id="fig_aligned_result_0032" src="images/output/aligned_0032.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0033.png" data-lightbox="result_0033" data-title="Input image 0033"><img id="fig_result_0033" src="images/output/0033.png" width="240px"></img></a></td><td><a href="images/output/aligned_0033.png" data-lightbox="aligned_result_0033" data-title="Result image 0033"><img id="fig_aligned_result_0033" src="images/output/aligned_0033.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0034.png" data-lightbox="result_0034" data-title="Input image 0034"><img id="fig_result_0034" src="images/output/0034.png" width="240px"></img></a></td><td><a href="images/output/aligned_0034.png" data-lightbox="aligned_result_0034" data-title="Result image 0034"><img id="fig_aligned_result_0034" src="images/output/aligned_0034.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0035.png" data-lightbox="result_0035" data-title="Input image 0035"><img id="fig_result_0035" src="images/output/0035.png" width="240px"></img></a></td><td><a href="images/output/aligned_0035.png" data-lightbox="aligned_result_0035" data-title="Result image 0035"><img id="fig_aligned_result_0035" src="images/output/aligned_0035.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0036.png" data-lightbox="result_0036" data-title="Input image 0036"><img id="fig_result_0036" src="images/output/0036.png" width="240px"></img></a></td><td><a href="images/output/aligned_0036.png" data-lightbox="aligned_result_0036" data-title="Result image 0036"><img id="fig_aligned_result_0036" src="images/output/aligned_0036.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0037.png" data-lightbox="result_0037" data-title="Input image 0037"><img id="fig_result_0037" src="images/output/0037.png" width="240px"></img></a></td><td><a href="images/output/aligned_0037.png" data-lightbox="aligned_result_0037" data-title="Result image 0037"><img id="fig_aligned_result_0037" src="images/output/aligned_0037.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0038.png" data-lightbox="result_0038" data-title="Input image 0038"><img id="fig_result_0038" src="images/output/0038.png" width="240px"></img></a></td><td><a href="images/output/aligned_0038.png" data-lightbox="aligned_result_0038" data-title="Result image 0038"><img id="fig_aligned_result_0038" src="images/output/aligned_0038.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0039.png" data-lightbox="result_0039" data-title="Input image 0039"><img id="fig_result_0039" src="images/output/0039.png" width="240px"></img></a></td><td><a href="images/output/aligned_0039.png" data-lightbox="aligned_result_0039" data-title="Result image 0039"><img id="fig_aligned_result_0039" src="images/output/aligned_0039.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0040.png" data-lightbox="result_0040" data-title="Input image 0040"><img id="fig_result_0040" src="images/output/0040.png" width="240px"></img></a></td><td><a href="images/output/aligned_0040.png" data-lightbox="aligned_result_0040" data-title="Result image 0040"><img id="fig_aligned_result_0040" src="images/output/aligned_0040.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0041.png" data-lightbox="result_0041" data-title="Input image 0041"><img id="fig_result_0041" src="images/output/0041.png" width="240px"></img></a></td><td><a href="images/output/aligned_0041.png" data-lightbox="aligned_result_0041" data-title="Result image 0041"><img id="fig_aligned_result_0041" src="images/output/aligned_0041.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0042.png" data-lightbox="result_0042" data-title="Input image 0042"><img id="fig_result_0042" src="images/output/0042.png" width="240px"></img></a></td><td><a href="images/output/aligned_0042.png" data-lightbox="aligned_result_0042" data-title="Result image 0042"><img id="fig_aligned_result_0042" src="images/output/aligned_0042.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0043.png" data-lightbox="result_0043" data-title="Input image 0043"><img id="fig_result_0043" src="images/output/0043.png" width="240px"></img></a></td><td><a href="images/output/aligned_0043.png" data-lightbox="aligned_result_0043" data-title="Result image 0043"><img id="fig_aligned_result_0043" src="images/output/aligned_0043.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0044.png" data-lightbox="result_0044" data-title="Input image 0044"><img id="fig_result_0044" src="images/output/0044.png" width="240px"></img></a></td><td><a href="images/output/aligned_0044.png" data-lightbox="aligned_result_0044" data-title="Result image 0044"><img id="fig_aligned_result_0044" src="images/output/aligned_0044.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0045.png" data-lightbox="result_0045" data-title="Input image 0045"><img id="fig_result_0045" src="images/output/0045.png" width="240px"></img></a></td><td><a href="images/output/aligned_0045.png" data-lightbox="aligned_result_0045" data-title="Result image 0045"><img id="fig_aligned_result_0045" src="images/output/aligned_0045.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0046.png" data-lightbox="result_0046" data-title="Input image 0046"><img id="fig_result_0046" src="images/output/0046.png" width="240px"></img></a></td><td><a href="images/output/aligned_0046.png" data-lightbox="aligned_result_0046" data-title="Result image 0046"><img id="fig_aligned_result_0046" src="images/output/aligned_0046.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0047.png" data-lightbox="result_0047" data-title="Input image 0047"><img id="fig_result_0047" src="images/output/0047.png" width="240px"></img></a></td><td><a href="images/output/aligned_0047.png" data-lightbox="aligned_result_0047" data-title="Result image 0047"><img id="fig_aligned_result_0047" src="images/output/aligned_0047.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0048.png" data-lightbox="result_0048" data-title="Input image 0048"><img id="fig_result_0048" src="images/output/0048.png" width="240px"></img></a></td><td><a href="images/output/aligned_0048.png" data-lightbox="aligned_result_0048" data-title="Result image 0048"><img id="fig_aligned_result_0048" src="images/output/aligned_0048.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0049.png" data-lightbox="result_0049" data-title="Input image 0049"><img id="fig_result_0049" src="images/output/0049.png" width="240px"></img></a></td><td><a href="images/output/aligned_0049.png" data-lightbox="aligned_result_0049" data-title="Result image 0049"><img id="fig_aligned_result_0049" src="images/output/aligned_0049.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0050.png" data-lightbox="result_0050" data-title="Input image 0050"><img id="fig_result_0050" src="images/output/0050.png" width="240px"></img></a></td><td><a href="images/output/aligned_0050.png" data-lightbox="aligned_result_0050" data-title="Result image 0050"><img id="fig_aligned_result_0050" src="images/output/aligned_0050.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0051.png" data-lightbox="result_0051" data-title="Input image 0051"><img id="fig_result_0051" src="images/output/0051.png" width="240px"></img></a></td><td><a href="images/output/aligned_0051.png" data-lightbox="aligned_result_0051" data-title="Result image 0051"><img id="fig_aligned_result_0051" src="images/output/aligned_0051.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0052.png" data-lightbox="result_0052" data-title="Input image 0052"><img id="fig_result_0052" src="images/output/0052.png" width="240px"></img></a></td><td><a href="images/output/aligned_0052.png" data-lightbox="aligned_result_0052" data-title="Result image 0052"><img id="fig_aligned_result_0052" src="images/output/aligned_0052.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0053.png" data-lightbox="result_0053" data-title="Input image 0053"><img id="fig_result_0053" src="images/output/0053.png" width="240px"></img></a></td><td><a href="images/output/aligned_0053.png" data-lightbox="aligned_result_0053" data-title="Result image 0053"><img id="fig_aligned_result_0053" src="images/output/aligned_0053.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0054.png" data-lightbox="result_0054" data-title="Input image 0054"><img id="fig_result_0054" src="images/output/0054.png" width="240px"></img></a></td><td><a href="images/output/aligned_0054.png" data-lightbox="aligned_result_0054" data-title="Result image 0054"><img id="fig_aligned_result_0054" src="images/output/aligned_0054.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0055.png" data-lightbox="result_0055" data-title="Input image 0055"><img id="fig_result_0055" src="images/output/0055.png" width="240px"></img></a></td><td><a href="images/output/aligned_0055.png" data-lightbox="aligned_result_0055" data-title="Result image 0055"><img id="fig_aligned_result_0055" src="images/output/aligned_0055.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0056.png" data-lightbox="result_0056" data-title="Input image 0056"><img id="fig_result_0056" src="images/output/0056.png" width="240px"></img></a></td><td><a href="images/output/aligned_0056.png" data-lightbox="aligned_result_0056" data-title="Result image 0056"><img id="fig_aligned_result_0056" src="images/output/aligned_0056.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0057.png" data-lightbox="result_0057" data-title="Input image 0057"><img id="fig_result_0057" src="images/output/0057.png" width="240px"></img></a></td><td><a href="images/output/aligned_0057.png" data-lightbox="aligned_result_0057" data-title="Result image 0057"><img id="fig_aligned_result_0057" src="images/output/aligned_0057.png" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0058.jpg" data-lightbox="result_0058" data-title="Input image 0058"><img id="fig_result_0058" src="images/output/0058.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0058.jpg" data-lightbox="aligned_result_0058" data-title="Result image 0058"><img id="fig_aligned_result_0058" src="images/output/aligned_0058.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0059.jpg" data-lightbox="result_0059" data-title="Input image 0059"><img id="fig_result_0059" src="images/output/0059.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0059.jpg" data-lightbox="aligned_result_0059" data-title="Result image 0059"><img id="fig_aligned_result_0059" src="images/output/aligned_0059.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0060.jpg" data-lightbox="result_0060" data-title="Input image 0060"><img id="fig_result_0060" src="images/output/0060.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0060.jpg" data-lightbox="aligned_result_0060" data-title="Result image 0060"><img id="fig_aligned_result_0060" src="images/output/aligned_0060.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0061.jpg" data-lightbox="result_0061" data-title="Input image 0061"><img id="fig_result_0061" src="images/output/0061.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0061.jpg" data-lightbox="aligned_result_0061" data-title="Result image 0061"><img id="fig_aligned_result_0061" src="images/output/aligned_0061.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0062.jpg" data-lightbox="result_0062" data-title="Input image 0062"><img id="fig_result_0062" src="images/output/0062.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0062.jpg" data-lightbox="aligned_result_0062" data-title="Result image 0062"><img id="fig_aligned_result_0062" src="images/output/aligned_0062.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0063.jpg" data-lightbox="result_0063" data-title="Input image 0063"><img id="fig_result_0063" src="images/output/0063.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0063.jpg" data-lightbox="aligned_result_0063" data-title="Result image 0063"><img id="fig_aligned_result_0063" src="images/output/aligned_0063.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0064.jpg" data-lightbox="result_0064" data-title="Input image 0064"><img id="fig_result_0064" src="images/output/0064.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0064.jpg" data-lightbox="aligned_result_0064" data-title="Result image 0064"><img id="fig_aligned_result_0064" src="images/output/aligned_0064.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0065.jpg" data-lightbox="result_0065" data-title="Input image 0065"><img id="fig_result_0065" src="images/output/0065.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0065.jpg" data-lightbox="aligned_result_0065" data-title="Result image 0065"><img id="fig_aligned_result_0065" src="images/output/aligned_0065.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0066.jpg" data-lightbox="result_0066" data-title="Input image 0066"><img id="fig_result_0066" src="images/output/0066.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0066.jpg" data-lightbox="aligned_result_0066" data-title="Result image 0066"><img id="fig_aligned_result_0066" src="images/output/aligned_0066.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0067.jpg" data-lightbox="result_0067" data-title="Input image 0067"><img id="fig_result_0067" src="images/output/0067.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0067.jpg" data-lightbox="aligned_result_0067" data-title="Result image 0067"><img id="fig_aligned_result_0067" src="images/output/aligned_0067.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0068.jpg" data-lightbox="result_0068" data-title="Input image 0068"><img id="fig_result_0068" src="images/output/0068.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0068.jpg" data-lightbox="aligned_result_0068" data-title="Result image 0068"><img id="fig_aligned_result_0068" src="images/output/aligned_0068.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0069.jpg" data-lightbox="result_0069" data-title="Input image 0069"><img id="fig_result_0069" src="images/output/0069.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0069.jpg" data-lightbox="aligned_result_0069" data-title="Result image 0069"><img id="fig_aligned_result_0069" src="images/output/aligned_0069.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0070.jpg" data-lightbox="result_0070" data-title="Input image 0070"><img id="fig_result_0070" src="images/output/0070.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0070.jpg" data-lightbox="aligned_result_0070" data-title="Result image 0070"><img id="fig_aligned_result_0070" src="images/output/aligned_0070.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0071.jpg" data-lightbox="result_0071" data-title="Input image 0071"><img id="fig_result_0071" src="images/output/0071.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0071.jpg" data-lightbox="aligned_result_0071" data-title="Result image 0071"><img id="fig_aligned_result_0071" src="images/output/aligned_0071.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0072.jpg" data-lightbox="result_0072" data-title="Input image 0072"><img id="fig_result_0072" src="images/output/0072.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0072.jpg" data-lightbox="aligned_result_0072" data-title="Result image 0072"><img id="fig_aligned_result_0072" src="images/output/aligned_0072.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0073.jpg" data-lightbox="result_0073" data-title="Input image 0073"><img id="fig_result_0073" src="images/output/0073.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0073.jpg" data-lightbox="aligned_result_0073" data-title="Result image 0073"><img id="fig_aligned_result_0073" src="images/output/aligned_0073.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0074.jpg" data-lightbox="result_0074" data-title="Input image 0074"><img id="fig_result_0074" src="images/output/0074.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0074.jpg" data-lightbox="aligned_result_0074" data-title="Result image 0074"><img id="fig_aligned_result_0074" src="images/output/aligned_0074.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0075.jpg" data-lightbox="result_0075" data-title="Input image 0075"><img id="fig_result_0075" src="images/output/0075.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0075.jpg" data-lightbox="aligned_result_0075" data-title="Result image 0075"><img id="fig_aligned_result_0075" src="images/output/aligned_0075.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0076.jpg" data-lightbox="result_0076" data-title="Input image 0076"><img id="fig_result_0076" src="images/output/0076.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0076.jpg" data-lightbox="aligned_result_0076" data-title="Result image 0076"><img id="fig_aligned_result_0076" src="images/output/aligned_0076.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0077.jpg" data-lightbox="result_0077" data-title="Input image 0077"><img id="fig_result_0077" src="images/output/0077.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0077.jpg" data-lightbox="aligned_result_0077" data-title="Result image 0077"><img id="fig_aligned_result_0077" src="images/output/aligned_0077.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0078.jpg" data-lightbox="result_0078" data-title="Input image 0078"><img id="fig_result_0078" src="images/output/0078.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0078.jpg" data-lightbox="aligned_result_0078" data-title="Result image 0078"><img id="fig_aligned_result_0078" src="images/output/aligned_0078.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0079.jpg" data-lightbox="result_0079" data-title="Input image 0079"><img id="fig_result_0079" src="images/output/0079.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0079.jpg" data-lightbox="aligned_result_0079" data-title="Result image 0079"><img id="fig_aligned_result_0079" src="images/output/aligned_0079.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0080.jpg" data-lightbox="result_0080" data-title="Input image 0080"><img id="fig_result_0080" src="images/output/0080.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0080.jpg" data-lightbox="aligned_result_0080" data-title="Result image 0080"><img id="fig_aligned_result_0080" src="images/output/aligned_0080.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0081.jpg" data-lightbox="result_0081" data-title="Input image 0081"><img id="fig_result_0081" src="images/output/0081.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0081.jpg" data-lightbox="aligned_result_0081" data-title="Result image 0081"><img id="fig_aligned_result_0081" src="images/output/aligned_0081.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0082.jpg" data-lightbox="result_0082" data-title="Input image 0082"><img id="fig_result_0082" src="images/output/0082.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0082.jpg" data-lightbox="aligned_result_0082" data-title="Result image 0082"><img id="fig_aligned_result_0082" src="images/output/aligned_0082.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0083.jpg" data-lightbox="result_0083" data-title="Input image 0083"><img id="fig_result_0083" src="images/output/0083.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0083.jpg" data-lightbox="aligned_result_0083" data-title="Result image 0083"><img id="fig_aligned_result_0083" src="images/output/aligned_0083.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0084.jpg" data-lightbox="result_0084" data-title="Input image 0084"><img id="fig_result_0084" src="images/output/0084.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0084.jpg" data-lightbox="aligned_result_0084" data-title="Result image 0084"><img id="fig_aligned_result_0084" src="images/output/aligned_0084.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0085.jpg" data-lightbox="result_0085" data-title="Input image 0085"><img id="fig_result_0085" src="images/output/0085.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0085.jpg" data-lightbox="aligned_result_0085" data-title="Result image 0085"><img id="fig_aligned_result_0085" src="images/output/aligned_0085.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0086.jpg" data-lightbox="result_0086" data-title="Input image 0086"><img id="fig_result_0086" src="images/output/0086.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0086.jpg" data-lightbox="aligned_result_0086" data-title="Result image 0086"><img id="fig_aligned_result_0086" src="images/output/aligned_0086.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0087.jpg" data-lightbox="result_0087" data-title="Input image 0087"><img id="fig_result_0087" src="images/output/0087.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0087.jpg" data-lightbox="aligned_result_0087" data-title="Result image 0087"><img id="fig_aligned_result_0087" src="images/output/aligned_0087.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0088.jpg" data-lightbox="result_0088" data-title="Input image 0088"><img id="fig_result_0088" src="images/output/0088.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0088.jpg" data-lightbox="aligned_result_0088" data-title="Result image 0088"><img id="fig_aligned_result_0088" src="images/output/aligned_0088.jpg" width="240px"></img></a></td></tr>
+</table>
+<table width="90%" left="5%" text-align="center">
+<tr><td><a href="images/output/0089.jpg" data-lightbox="result_0089" data-title="Input image 0089"><img id="fig_result_0089" src="images/output/0089.jpg" width="240px"></img></a></td><td><a href="images/output/aligned_0089.jpg" data-lightbox="aligned_result_0089" data-title="Result image 0089"><img id="fig_aligned_result_0089" src="images/output/aligned_0089.jpg" width="240px"></img></a></td></tr>
+</table>
