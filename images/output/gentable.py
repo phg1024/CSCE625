@@ -6,9 +6,11 @@ def toString(i, digits):
 
 template = '<a href="images/output/{}" data-lightbox="{}" data-title="{}"><img id="{}" src="images/output/{}" width="240px"></img></a>'
 	
+lostset = [78, 63, 57, 52, 43, 19, 6, 11, 38, 40]
+	
 for i in range(90):
 	ext = ''
-	if i < 58:
+	if i <= 58:
 		ext = '.png'
 	else:
 		ext = '.jpg'
