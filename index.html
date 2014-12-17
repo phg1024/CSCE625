@@ -104,8 +104,21 @@ title: Blogging Like a Hacker
         While applying the trained model for face alignment, a random shape vector is chosen from  a database of face shapes as initial guess. Since the output of the algorithm is a refinement of the input shape, the quality of the initial guess would inevitably affect the alignment output. To remove the effect of this randomness, multiple initial shapes are used simultaneously and the final shape is computed as a combination of all outputs. Cao et al suggested 5 initial shapes would produce good result in most cases, however, more initial shapes are needed in my experiment.
         <!-- Results -->
         <h3><a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results and Analysis</h3>   
+        <h4>Performance Summary</h4>
+        The algorithm is tested with the test data obtain from the same source as training data. The error of the test cases is measured as the mean distance between the output shape vector and the ground truth shape. To obtain a shape invariant measure, the error is normalized by the distance between two pupils of the ground truth shape. For the test data with 507 images, the average normalized error in the test data set is 0.0581, which is comparable to the results reported in <a href="#paper_cao2013ijcv">[2]</a>. The cumulative error curve of the test data set is shown in <a href="#fig_cdf">Figure 3</a>. Note that the relative error is below 0.1 in more than 90% percent of all test cases, and below 0.05 in about 50% of all test cases.
+        <div id="fig_cdf" class="imagebox"><a href="images/error_dist.png" data-lightbox="error_dist" data-title="Error distribution."><img src="images/error_dist.png" width="480px"></a><br>
+            <p class="imagetitle"><strong>Figure 3.</strong> Cumulative error curve of the test data.</p>
+        </div>
+        A brief analysis on the results reveals that the error mainly come from contour points, i.e. point 1 ~ 17. <a href="#fig_girl_error">Figure 4</a> shows a typical error curve of a single output shape vector. Note the error for the first 17 points are larger than other points.
+        <div id="fig_girl_error" class="imagebox"><a href="images/error_girl.png" data-lightbox="error_girl" data-title="Error curve of a single output shape vector."><img src="images/error_girl.png" width="480px"></a><br>
+            <p class="imagetitle"><strong>Figure 4.</strong> Error curve of a single output shape vector. <a href="#fig_girl">Figure 5</a> visualize this shape and corresponding ground truth shape.</p>
+        </div>
+        <div id="fig_girl" class="imagebox"><a href="images/girl.png" data-lightbox="girl" data-title="A comparison between output shape and ground truth shape."><img src="images/girl.png" width="480px"></a><br>
+            <p class="imagetitle"><strong>Figure 5.</strong> Comparison of output shape (green) and ground truth shape (red).</p>
+        </div>      
+      
         <h4>Successful Cases</h4>
-        For most images with frontal face and neutral expression, the algorithm works very well. The average alignment error is ?.
+        For most images with frontal face and neutral expression, the algorithm works very well. Below are 4 successful cases from the test data. Note the head poses and expressions vary among these images.
         <div>
         <table width="90%" left="5%" text-align="center">
             <tr>
@@ -174,8 +187,8 @@ end
           <p>Note that you need to run the above script in the folder where you put the downloaded source code</p>
           <h3><a id="Usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h3>
           <ol>
-              <li>Xudong Cao, Yichen Wei, Fang Wen, Jian Sun. <em><a href="http://research.microsoft.com/pubs/192097/cvpr12_facealignment.pdf">Face Alignment by Explicit Shape Regression.</a></em> In CVPR 2012.</li>
-              <li>Xudong Cao, Yichen Wei, Fang Wen, Jian Sun. <em><a href="http://dx.doi.org/10.1007/s11263-013-0667-3">Face Alignment by Explicit Shape Regression.</a></em> International Journal of Computer Vision (IJCV), Volume 107, Number 2, pages 177-190.</li>
+              <li id="paper_cao2012cvpr">Xudong Cao, Yichen Wei, Fang Wen, Jian Sun. <em><a href="http://research.microsoft.com/pubs/192097/cvpr12_facealignment.pdf">Face Alignment by Explicit Shape Regression.</a></em> In CVPR 2012.</li>
+              <li id="paper_cao2013ijcv">Xudong Cao, Yichen Wei, Fang Wen, Jian Sun. <em><a href="http://dx.doi.org/10.1007/s11263-013-0667-3">Face Alignment by Explicit Shape Regression.</a></em> International Journal of Computer Vision (IJCV), Volume 107, Number 2, pages 177-190.</li>
           </ol>
 
 
