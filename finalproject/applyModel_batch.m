@@ -1,4 +1,4 @@
-function [boxes, points, succeeded] = applyModel(img, model)
+function [boxes, points, succeeded] = applyModel_batch(img, model)
 
 %% Load a face detector and an image
 cascade_filepath = 'C:\Users\Peihong\Desktop\Code\Libraries\opencv\sources\data\haarcascades';
@@ -35,6 +35,7 @@ for bidx = 1:numel(boxes)
     if sfactor == 0.0
         sfactor = 1.0;
     end
+    sfactor = 1.0;
     
     I = imresize(I0, sfactor);    
     box = (boxes{bidx}) * sfactor;
@@ -55,57 +56,63 @@ for bidx = 1:numel(boxes)
     newbox = box;
     newbox(1) = newbox(1) - nbx_tl; newbox(2) = newbox(2) - nby_tl;
     
-    ntrials = 75;
+    ntrials = 75; nneighbors = 15;
     idx = randperm(numel(model.init_shapes), ntrials);
     Lfp = 136; Nfp = Lfp/2;
     results = zeros(ntrials, Lfp);
     T = numel(model.stages); F = numel(model.stages{1}.ferns{1}.thresholds);
     K = numel(model.stages{1}.ferns);
     meanshape = model.meanshape;
+    
+    guess = cell2mat(model.init_shapes(idx));
     for i=1:ntrials
-        % get an initial guess
-        guess = cell2mat(model.init_shapes(idx(i)));
+        guess(i,:) = alignShapeToBox(guess(i,:), model.init_boxes{idx(i)}, newbox);
+    end
+    
+    M = cell(ntrials, 1);
+    dp = cell(ntrials, 1);    
+    for t=1:T
+        lc = model.stages{t}.localCoords;
+        [P,~] = size(lc);
+        pix = zeros(ntrials, P);
+        for i=1:ntrials
+            [s, R, ~] = estimateTransform(reshape(guess(i,:), Nfp, 2), reshape(meanshape, Nfp, 2));
+            M{i} = s*R;        
         
-        % align the guess to the bounding box
-        guess = alignShapeToBox(guess, model.init_boxes{idx(i)}, newbox);
-        
-        % find the points using the model
-        for t=1:T
-            [s, R, ~] = estimateTransform(reshape(guess, Nfp, 2), reshape(meanshape, Nfp, 2));
-            M = s*R;
-            lc = model.stages{t}.localCoords;
-            [P,~] = size(lc);
-            dp = M \ lc(:,2:3)';
-            dp = dp';
-            fpPos = reshape(guess, Nfp, 2);
-            pixPos = fpPos(ind2sub([Nfp 2],lc(:,1)), :) + dp;
+            dp{i} = M{i} \ lc(:,2:3)';
+            dp{i} = dp{i}';
+            fpPos = reshape(guess(i,:), Nfp, 2);
+            pixPos = fpPos(ind2sub([Nfp 2],lc(:,1)), :) + dp{i};
             [rows, cols] = size(newimg);
             pixPos = round(pixPos);
             pixPos(:,1) = min(max(pixPos(:,1), 1), cols);
             pixPos(:,2) = min(max(pixPos(:,2), 1), rows);
-            pix = newimg(sub2ind(size(newimg), pixPos(:,2)', pixPos(:,1)'));
-
-            ds = 0;
-            for k=1:K
-                rho = zeros(F, 1);
-                for f=1:F
-                    m = model.stages{t}.features{k}{f}.m;
-                    n = model.stages{t}.features{k}{f}.n;
-                    rho(f) = pix(m) - pix(n);
-                end
-                ds = ds + evaluateFern(rho, model.stages{t}.ferns{k});
-            end
-            
-            ds = reshape(ds, Nfp, 2)';
-            ds = M\ds;
-            ds = reshape(ds', 1, Lfp);
-            guess = guess + ds;
+            pix(i,:) = reshape(newimg(sub2ind(size(newimg), pixPos(:,2)', pixPos(:,1)')), 1, P);
         end
-        results(i,:) = guess;
+        
+        ds = zeros(ntrials, Lfp);
+        rho = zeros(ntrials, F);
+        for k=1:K            
+            for f=1:F
+                m = model.stages{t}.features{k}{f}.m;
+                n = model.stages{t}.features{k}{f}.n;
+                rho(:, f) = pix(:, m) - pix(:, n);
+            end
+            ds = ds + evaluateFern_batch(rho, model.stages{t}.ferns{k});
+        end
+        
+        for i=1:ntrials
+            dds = reshape(ds(i,:), Nfp, 2)';
+            dds = M{i}\dds;
+            ds(i,:) = reshape(dds', 1, Lfp);
+        end
+        guess = guess + ds;
     end
     
-    % pick 5 best results
-    nearestNeighbors = knnsearch(results, mean(results), 'K', 25);
+    results = guess;
+    
+    % pick k best results
+    nearestNeighbors = knnsearch(results, mean(results), 'K', nneighbors);
     points{bidx} = median(results(nearestNeighbors, :));
     
     % restore the correct positions

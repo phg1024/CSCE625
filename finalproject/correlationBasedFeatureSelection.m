@@ -1,4 +1,4 @@
-function features = correlationBasedFeatureSelection(Y, Mrho, Mrho_centered, varRhoDRho, F)
+function features = correlationBasedFeatureSelection(Y, Mrho, Mrho_centered, inv_varRhoDRho, F)
 [~, Lfp] = size(Y); Nfp = Lfp/2;
 [n, P] = size(Mrho);
 features = cell(F, 1);
@@ -9,19 +9,26 @@ for i=1:F
     
     covYprob_rho = (sum(bsxfun(@times, Yprob-mean(Yprob), Mrho_centered)))/(n-1);
     covYprob_rho = covYprob_rho';
-    %covYprob_rho = covVM(Yprob, Mrho_centered);    
+    %covYprob_rho = covVM(Yprob, Mrho_centered);
     
-    varYprob = var(Yprob);
-
+    %varYprob = var(Yprob);
+    %inv_varYprob = 1.0 / sqrt(varYprob);
+    
     covRhoMcovRho = repmat(covYprob_rho, 1, P) - repmat(covYprob_rho', P, 1);
     
-    corrYprob_rhoDrho = covRhoMcovRho ./ sqrt(varYprob .* varRhoDRho);
-    corrYprob_rhoDrho(logical(eye(size(corrYprob_rhoDrho)))) = -10000.0;
+    %corrYprob_rhoDrho = covRhoMcovRho .* (inv_varYprob * inv_varRhoDRho);
+    corrYprob_rhoDrho = covRhoMcovRho .* inv_varRhoDRho;
     
-    [maxCorr_perCol, rowIdx] = max(corrYprob_rhoDrho);
-    [maxCorr, colIdx] = max(maxCorr_perCol);
+%     corrYprob_rhoDrho(logical(eye(size(corrYprob_rhoDrho)))) = -10000.0;
     
-    f.m = rowIdx(colIdx); f.n = colIdx;
+    for j=1:P
+        corrYprob_rhoDrho(j, j) = -10000.0;
+    end
+    
+    [maxCorr, maxLoc] = max(corrYprob_rhoDrho(:));
+    [maxLoc_row, maxLoc_col] = ind2sub(size(corrYprob_rhoDrho), maxLoc);
+    
+    f.m = maxLoc_row; f.n = maxLoc_col;
     f.rho_m = Mrho(:,f.m); f.rho_n = Mrho(:,f.n);
     f.coor_rhoDiff = maxCorr;
     features{i} = f;

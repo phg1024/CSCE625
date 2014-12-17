@@ -1,11 +1,19 @@
-function showImageWithPoints(img, box, pts)
-imshow(img);
-%rectangle('Position', box, 'EdgeColor', 'r');
+function showImageWithPoints(img, boxes, pts, pts_ref)
+imshow(img, 'border', 'tight');
 hold on;
-plot(pts(:,1), pts(:,2), 'og', 'MarkerSize', 4);
-if 0
-    for i=1:size(pts,1)
-        text(pts(i,1), pts(i,2), num2str(i));
+for i=1:numel(boxes)
+    rectangle('Position', boxes{i}, 'EdgeColor', 'r');
+
+    plot(pts{i}(:,1)-2, pts{i}(:,2)-2, 'og', 'MarkerSize', 4);
+    if 0
+        for j=1:size(pts{i},1)
+            text(pts{i}(j,1), pts{i}(j,2), num2str(j));
+        end
     end
 end
+
+if nargin > 3
+    plot(pts_ref(:,1)-2, pts_ref(:,2)-2, 'xr', 'MarkerSize', 4);
+end
+
 end

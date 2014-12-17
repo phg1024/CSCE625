@@ -1,6 +1,7 @@
 function showTrainingSample(sample)
 img = sample.image; box = sample.box; 
-pts = sample.truth; guess = sample.guess;
+npts = length(sample.truth)/2;
+pts = reshape(sample.truth, npts, 2); guess = reshape(sample.guess, npts, 2);
 imshow(img);
 rectangle('Position',  box, 'EdgeColor', 'r');
 hold on;

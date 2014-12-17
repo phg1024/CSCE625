@@ -14,6 +14,8 @@ end
 trainset_size = 0;
 init_trainset = cell(ninputs, 1);
 init_shapes = cell(ninputs, 1);
+init_boxes = cell(ninputs, 1);
+tic;
 for t=1:ninputs
     if mod(t, 100) == 0
         fprintf('processed %d images ...\n', t);
@@ -27,65 +29,82 @@ for t=1:ninputs
         ptsfile = [opts.path, opts.prefix, num2index(t, opts.digits), opts.ptsext];
     end
     
-    if ~exist(imgfile)
+    if ~exist(imgfile, 'file') || ~exist(ptsfile, 'file')
         continue;
     end
     
+    boxfile = regexprep(imgfile, '\.\w+$', '.box');
+    
     try
-    im = imread(imgfile);
-    % Preprocess
-    [h, w, channels] = size(im);
-    scalingFactor = 1.0;
-    if max(h, w) > 640
-        scalingFactor = 640.0 / max(h, w);
-        im = imresize(im, scalingFactor);
-    end
-    
-    if channels > 1
-        im = rgb2gray(im);
-    end
-    I0 = im;
-    gr = cv.equalizeHist(im);
-    
-    % Detect
-    boxes = detector.detect(gr, 'ScaleFactor',  1.3, ...
-                                'MinNeighbors', 2, ...
-                                'MinSize',      [30, 30]);
-    
-    % Load the annotations and find the correct box    
-    points = loadPoints(ptsfile, opts.npts);
-    points = points * scalingFactor;
-    
-    % Find the valid box
-    box = findValidBox(boxes, points);
-    
-    if length(box) == 4
-        % Draw results
-        if 0
-            clf; showImageWithPoints(gr, box, points); pause;
+        im = imread(imgfile);
+        [h, w, channels] = size(im);
+        if channels > 1
+            im = rgb2gray(im);
+        end
+        I0 = im;
+        gr = cv.equalizeHist(im);
+        
+        % Detect face
+        if exist(boxfile, 'file')
+            boxes = loadBoxes(boxfile);
+        else
+            boxes = detector.detect(gr, 'ScaleFactor',  1.3, ...
+                'MinNeighbors', 2, ...
+                'MinSize',      [30, 30]);   
+            boxes = reshape(boxes, numel(boxes), 1);
+            boxes = cell2mat(boxes);
+            saveBoxes(boxes, boxfile);
+        end
+
+        % Load the annotations and find the correct box
+        points = loadPoints(ptsfile, opts.npts);
+        
+        % Find the valid box
+        box = findValidBox(boxes, points);
+        
+        % Scale the image for faster process        
+        scalingFactor = 1.0;
+        maxAllowedSize = 3200;
+        if max(h, w) > maxAllowedSize
+            scalingFactor = maxAllowedSize / max(h, w);
+            I0 = imresize(I0, scalingFactor);
         end
         
-        % Scale it again, make the box 160x160
-        boxSize = box(3);
-        sfactor = 160.0 / boxSize;
+        points = points * scalingFactor;
+        box = box * scalingFactor;
         
-        I0 = imresize(I0, sfactor);
-        points = points * sfactor;
-        box = box * sfactor;
-
-        trainset_size = trainset_size + 1;
-        npts = size(points, 1);
-        init_trainset{trainset_size} = struct('image', I0, 'box', box, 'truth', reshape(points, 1, npts*2));
-        init_shapes{trainset_size} = reshape(points, 1, npts*2);
-    else
-        % not a valid training image
-    end
+        if length(box) == 4
+            % Draw results
+            if 0
+                clf; showImageWithPoints(gr, box, points); pause;
+            end
+            
+            % Scale it again, make the box
+            boxSize = box(3);
+            sfactor = opts.params.window_size / boxSize;
+            if sfactor == 0.0
+                sfactor = 1.0;
+            end
+            
+            I0 = imresize(I0, sfactor);
+            points = points * sfactor;
+            box = (box) * sfactor;
+            
+            trainset_size = trainset_size + 1;
+            npts = size(points, 1);
+            init_trainset{trainset_size} = struct('image', I0, 'box', box, 'truth', reshape(points, 1, npts*2));
+            init_shapes{trainset_size} = reshape(points, 1, npts*2);
+            init_boxes{trainset_size} = box;
+        else
+            % not a valid training image
+        end
     catch err
         disp(imgfile);
         disp(ptsfile);
         rethrow(err);
     end
 end
+toc;
 
 init_trainset = init_trainset(~cellfun('isempty',init_trainset));
 init_shapes = init_shapes(~cellfun('isempty',init_shapes));
@@ -108,7 +127,7 @@ for t=1:trainset_size
         trainset{idx}.guess = init_trainset{indices(j)}.truth;
         
         % align the guess shape with the box
-        trainset{idx}.guess = alignShapeToBox(trainset{idx}.guess, trainset{idx}.box);
+        trainset{idx}.guess = alignShapeToBox(trainset{idx}.guess, init_trainset{indices(j)}.box, trainset{idx}.box);
         
         if 0
             clf;showTrainingSample(trainset{idx});pause;
@@ -135,7 +154,8 @@ for t=1:T
     toc;
     % learn stage regressor
     tic;
-    stages{t} = learnStageRegressor(trainset, Y, Mnorm, opts);    
+    opts.params.kappa = opts.params.max_kappa + (opts.params.min_kappa-opts.params.max_kappa)*(t/T);
+    stages{t} = learnStageRegressor(trainset, Y, Mnorm, opts);
     toc;
     % update guess shapes
     tic;
@@ -153,7 +173,9 @@ end
 
 model.meanshape = meanshape;
 model.init_shapes = init_shapes;
+model.init_boxes = init_boxes;
 model.stages = stages;
+model.window_size = opts.params.window_size;
 end
 
 function idxstr = num2index(v, digits)
@@ -168,5 +190,25 @@ fid = fopen(filename, 'r');
 textscan(fid, '%s', 3, 'Delimiter', '\n');
 points = textscan(fid, '%f %f', npts, 'Delimiter', '\n');
 points = cell2mat(points);
+fclose(fid);
+end
+
+function boxes = loadBoxes(filename)
+fid = fopen(filename, 'r');
+nboxes = fscanf(fid, '%d', 1);
+boxes = zeros(nboxes, 4);
+for i=1:nboxes
+boxes(i,:) = fscanf(fid, '%d', [1, 4]);
+end
+fclose(fid);
+end
+
+function saveBoxes(boxes, filename)
+[nboxes, ~] = size(boxes);
+fid = fopen(filename, 'w');
+fprintf(fid, '%d\n', nboxes);
+for i=1:nboxes
+    fprintf(fid, '%d %d %d %d\n', boxes(i,1), boxes(i,2), boxes(i,3), boxes(i,4));
+end
 fclose(fid);
 end

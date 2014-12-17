@@ -37,6 +37,7 @@ Mrho_centered = Mrho - repmat(mean(Mrho), size(Mrho, 1), 1);
 
 diagCovRho = diag(covRho);
 varRhoDRho = -2.0 * covRho + repmat(diagCovRho, 1, P) + repmat(diagCovRho', P, 1);
+inv_varRhoDRho = 1.0 ./ varRhoDRho;
 toc;
 
 % compute all ferns
@@ -44,7 +45,7 @@ disp('construct ferns...');
 ferns = cell(K,1);
 features = cell(K, 1);
 for k=1:K
-    features{k} = correlationBasedFeatureSelection(Y, Mrho, Mrho_centered, varRhoDRho, F);
+    features{k} = correlationBasedFeatureSelection(Y, Mrho, Mrho_centered, inv_varRhoDRho, F);
     ferns{k} = trainFern(features{k}, Y, Mrho, beta);
     
     % update the normalized target
